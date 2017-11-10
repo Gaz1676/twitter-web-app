@@ -1,0 +1,59 @@
+<!--
+* Author: Gary Fleming
+* Student No: 20019497
+* Start Date: Oct 10th 2017
+-->
+
+<section class="ui inverted teal segment">
+    <section class="ui yellow raised segment">
+        <div class="ui grid">
+            <aside class="six wide column">
+                <img src="images/global.png" class="ui medium centered image">
+            </aside>
+
+        <article class="ten wide column">
+        <table class="ui selectable table raised segment">
+            <h2 class="ui center aligned header segment">
+                Global Timeline Tweets
+            </h2>
+
+        <tbody>
+            {{#if tweets}}
+                {{#each tweets}}
+                <tr>
+                    <td></td>
+                    <td>
+                        <!-- https://semantic-ui.com/views/comment.html -->
+                        <div class="ui comments">
+                            <div class="comment">
+                                <div class="content">
+                                    <div class="text">
+                                        {{text}}
+                                    </div>
+                                    <div class="metadata">
+                                        <div class="email"><i class="grey mail outline icon"></i> {{tweeter.email}}</div>
+                                        <div class="date"><i class="grey at icon"></i> {{date}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                {{/each}}
+            </tbody>
+
+            </table>
+            </article>
+            </div>
+            {{else}}
+                <aside class="ten wide column">
+                    <section class="ui center aligned segment">
+                        <h2 class="ui red header">No one is Tweeting???? <br> Goodbye World! </h2>
+                    </section>
+                </aside>
+            {{/if}}
+
+    </section>
+</section>
+
+<script src="js/tada.js"></script>

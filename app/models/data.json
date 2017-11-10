@@ -1,0 +1,42 @@
+{
+  "users": {
+    "_model": "User",
+    "homer": {
+      "firstName": "Homer",
+      "lastName": "Simpson",
+      "email": "homer@simpson.com",
+      "password": "secret"
+    },
+    "marge": {
+      "firstName": "Marge",
+      "lastName": "Simpson",
+      "email": "marge@simpson.com",
+      "password": "secret"
+    }
+  },
+  "tweets": {
+    "_model": "Tweet",
+    "one": {
+      "text": "MMMmmmmmmm beeeerrrrrrr!!",
+      "date": "4:41 PM - 10th Nov 17",
+      "tweeter": "->users.homer"
+    },
+    "two": {
+      "text": "Well Hello There World!",
+      "date": "4:41 PM - 10th Nov 17",
+      "tweeter": "->users.marge"
+    },
+    "three": {
+      "text": "AAGGHHH Mr Burns",
+      "date": "4:41 PM - 10th Nov 17",
+      "tweeter": "->users.homer"
+    }
+  },
+  "admins": {
+    "_model": "Admin",
+    "admin": {
+      "email": "tim@tom.com",
+      "password": "secret"
+    }
+  }
+}

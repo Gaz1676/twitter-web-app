@@ -1,0 +1,38 @@
+<!--
+* Author: Gary Fleming
+* Student No: 20019497
+* Start Date: Oct 10th 2017
+-->
+
+<section class="ui inverted teal segment">
+    <section class="ui yellow raised segment">
+        <div class="ui grid">
+            <aside class="ui eight wide column">
+                <img class="ui medium centered image" src="images/tweet.png">
+            </aside>
+
+            <div class="ui eight wide column">
+                <div class="ui yellow raised fluid form center aligned segment">
+                    <form class="ui form" action="/sendtweet" method="post">
+                        <div class="ui red field">
+                            <h2 class="ui blue header">Extra, Extra Tweet All About It!!</h2>
+                            <textarea placeholder="What's on your mind..." name="text" rows="4" cols="50"></textarea>
+                            <span id='remainingChars'></span>
+                        </div>
+                        <br>
+                        <button class="ui animated fade red submit button">
+                            <div class="visible content"><i class="yellow twitter icon"></i>Post</div>
+                            <div class="hidden content">Submit</div>
+                        </button>
+                    </form>
+
+                    {{> formerror }}
+                </div>
+            </div>
+
+        </div>
+    </section>
+</section>
+
+<script src="js/jiggle.js"></script>
+<script src="js/counter.js"></script>

@@ -1,0 +1,86 @@
+<!--
+* Author: Gary Fleming
+* Student No: 20019497
+* Start Date: Oct 10th 2017
+-->
+
+<section class="ui inverted teal segment">
+    <section class="ui yellow raised segment">
+        <div class="ui grid">
+            <aside class="six wide column">
+                <img src="images/tweetList.png" class="ui centered image">
+            </aside>
+
+            {{#if tweets}}
+                <article class="ten wide column">
+                    <form class="ui form" action="/adminremovetweet" method="POST">
+                        <table class="ui selectable striped table raised segment">
+                            <thead>
+                            <tr>
+                                <th>Select</th>
+                                <th></th>
+                                <th>Tweets</th>
+                            </tr>
+                            </thead>
+
+                            <tbody class="ui red segment">
+                            {{#each tweets}}
+                                <tr>
+                                    <td>
+                                        <!-- https://semantic-ui.com/modules/checkbox.html -->
+                                        <div class="ui checkbox">
+                                            <input type="checkbox" name="{{id}}">
+                                            <label></label>
+                                        </div>
+                                    </td>
+                                    <td></td>
+                                    <td>
+                                        <!-- https://semantic-ui.com/views/comment.html -->
+                                        <div class="ui comments">
+                                            <div class="comment">
+                                                <div class="content">
+                                                    <div class="text">
+                                                        {{text}}
+                                                    </div>
+                                                    <div class="metadata">
+                                                        <div class="email"><i class="grey mail outline icon"></i> {{tweeter.email}}</div>
+                                                        <div class="date"><i class="at icon"></i>{{date}}</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            {{/each}}
+                            </tbody>
+
+                            <tfoot>
+                            <tr>
+                                <th colspan="4">
+                                    <!-- https://semantic-ui.com/elements/button.html -->
+                                    <div class="ui buttons">
+                                        <button class="ui positive button" id="remove_tweet"><i class="trash icon"></i>Selected
+                                        </button>
+                                        <div class="or" id="or"></div>
+                                        <button class="ui negative button" id="remove_all" formaction="/adminremovealltweets">
+                                            All Tweets&emsp;<i class="trash icon"></i>
+                                        </button>
+                                    </div>
+                                </th>
+                            </tr>
+                            </tfoot>
+
+                        </table>
+                    </form>
+                </article>
+            {{else}}
+                <aside class="ten wide column">
+                    <section class="ui center aligned segment">
+                        <h2 class="ui red header">No Tweets??? This User is very lazy or very dead!!</h2>
+                        <img src="images/thumbsup.png" class="ui tiny centered image">
+                    </section>
+                </aside>
+            {{/if}}
+        </div>
+    </section>
+</section>

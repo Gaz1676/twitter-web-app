@@ -1,0 +1,25 @@
+<!--
+* Author: Gary Fleming
+* Student No: 20019497
+* Start Date: Oct 10th 2017
+-->
+
+<!--
+new partial to display potential errors in our forms
+this partial will only populate the view if errors are passed, otherwise it will be silent.
+-->
+
+{{#if errors}}
+    <div class="ui negative message transition">
+        <div class="header">
+            <i class="warning sign icon"></i>
+            Errors with your submission
+            <i class="warning sign icon"></i>
+        </div>
+        <ul class="list">
+            {{#each errors}}
+                <li>{{message}}</li>
+            {{/each}}
+        </ul>
+    </div>
+{{/if}}

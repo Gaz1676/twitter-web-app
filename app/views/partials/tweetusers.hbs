@@ -1,0 +1,59 @@
+<!--
+* Author: Gary Fleming
+* Student No: 20019497
+* Start Date: Oct 10th 2017
+-->
+
+<section class="ui inverted teal segment">
+    <section class="ui yellow raised segment">
+        {{#if users}}
+        <article class="eight wide column">
+            <h2 class="ui blue center aligned header">Remove Twitter Users</h2>
+            <table class="ui fixed table">
+
+                    <tbody>
+                    {{#each users}}
+                        <tr>
+                            <td>
+                                <!-- https://semantic-ui.com/views/comment.html -->
+                                <div class="ui comments">
+                                    <div class="comment">
+                                        <div class="content">
+                                            <div class="text">
+                                                <a href="/viewuser/{{id}}">
+                                                    <h3>
+                                                        <i class="ui blue twitter icon"></i> {{firstName}} {{lastName}}
+                                                    </h3>
+                                                </a>
+                                            </div>
+                                            <div class="metadata">
+                                                &emsp;&emsp;<i class="at icon"></i>{{email}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="column right aligned">
+                                    <a href="/removeuser/{{id}}">
+                                        <i class="big red trash icon"></i>
+                                    </a>
+                                </div>
+                            </td>
+                    {{/each}}
+                    </tbody>
+            </table>
+        </article>
+        {{else}}
+            <aside class="ten wide column">
+                <section class="ui center aligned segment">
+                    <h2 class="ui red header">No Users to Remove?? <br>There must be an Apocalypse!! </h2> <img src="images/zombie_twitter.png" class="ui medium centered image">
+                </section>
+            </aside>
+        {{/if}}
+    </section>
+</section>
+
+<script src="js/trash-icon-jiggle.js"></script>
+<script src="js/user-name-pulse.js"></script>
