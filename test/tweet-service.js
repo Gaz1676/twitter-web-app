@@ -5,7 +5,7 @@
 'use strict';
 
 const SyncHttpService = require('./sync-http-service');
-const baseUrl = 'https://dry-gorge-60274.herokuapp.com';
+const baseUrl = 'https://gary:4000';
 
 class TweetService {
 

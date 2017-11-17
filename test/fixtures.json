@@ -1,5 +1,5 @@
 {
-  "tweetService": "https://dry-gorge-60274.herokuapp.com",
+  "tweetService": "http://gary:4000",
   "users": [
     {
       "firstName": "Homer",
@@ -12,44 +12,43 @@
       "lastName": "Simpson",
       "email": "marge@simpson.com",
       "password": "secret"
-    }
-  ],
-  "tweets": [
-    {
-      "text": "MMMmmmmmmm beeeerrrrrrr!!",
-      "date": "4:41 PM - 10th Nov 17",
-      "sender": {
-        "firstName": "Homer",
-        "lastName": "Simpson",
-        "email": "homer@simpson.com",
-        "password": "secret"
-      }
     },
     {
-      "text": "Well Hello There World!",
-      "date": "4:41 PM - 10th Nov 17",
-      "tweeter": {
-        "firstName": "Marge",
-        "lastName": "Simpson",
-        "email": "marge@simpson.com",
-        "password": "secret"
-      }
+      "firstName": "Lisa",
+      "lastName": "Simpson",
+      "email": "lisa@simpson.com",
+      "password": "secret"
     }
   ],
-  "newTweet": {
-    "text": "test",
-    "date": "10:11 PM - 12th Nov 17",
-    "tweeter": {
-      "firstName": "test",
-      "lastName": "test",
-      "email": "test@test.com",
-      "password": "test"
+  "admins": {
+    "_model": "Admin",
+    "Admin": {
+      "email": "admin@simpson.com",
+      "password": "secret"
     }
   },
   "newUser": {
-    "firstName": "Ned",
-    "lastName": "Flanders",
-    "email": "ned@flanders.com",
+    "firstName": "Bart",
+    "lastName": "Simpson",
+    "email": "bart@simpson.com",
     "password": "secret"
-  }
+  },
+  "newTweet": {
+    "text": "Test",
+    "date": "4:41 PM - 10th Nov 17"
+  },
+  "tweets": [
+    {
+      "text": "MMMmmmmmmm beeeerrrrrrr!!",
+      "date": "4:41 PM - 10th Nov 17"
+    },
+    {
+      "text": "Well Hello There World!",
+      "date": "4:41 PM - 10th Nov 17"
+    },
+    {
+      "text": "AAGGHHH Mr Burns",
+      "date": "4:41 PM - 10th Nov 17"
+    }
+  ]
 }
