@@ -41,6 +41,8 @@
    
    <a href="https://dry-gorge-60274.herokuapp.com/">Heroku - My Twitter Web App</a>
    
+   <a href="https://twitter-kbtspeidzj.now.sh/">Zeit - My Twitter Web App</a>
+   
 ***
     
 <img src="http://res.cloudinary.com/cloud101/image/upload/c_scale,h_200,w_420/v1507647665/home_qihqjh.png"/> <img src="http://res.cloudinary.com/cloud101/image/upload/c_scale,h_200,w_420/v1507647665/about_khr0px.png"/> 
