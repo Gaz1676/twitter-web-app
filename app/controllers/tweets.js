@@ -34,9 +34,9 @@ exports.timeline = {
   handler: function (request, reply) {
     const userId = request.auth.credentials.loggedInUser;
     let tweets = null;
-    Tweet.find({tweeter: userId}).populate('tweet').sort({ date: 'desc'}).then(allTweets => {
+    Tweet.find({ tweeter: userId }).populate('tweet').sort({ date: 'desc' }).then(allTweets => {
       tweets = allTweets;
-      return User.findOne({user: userId});
+      return User.findOne({ user: userId });
     }).then(userFound => {
       reply.view('timeline', {
         title: 'All Tweets To Date',
@@ -48,7 +48,6 @@ exports.timeline = {
     });
   },
 };
-
 
 // routes to render tweet page
 exports.tweet = {
@@ -90,9 +89,26 @@ exports.sendTweet = {
     tweet.date = new Date();
     tweet.date = DateFormat(tweet.date, 'h:MM TT - dS mmm yy');
     Tweet.create(tweet).then(newTweet => {
-      reply.redirect('/timeline');
+      reply.redirect('/globaltweets');
     }).catch(err => {
       reply.redirect(err);
+    });
+  },
+};
+
+
+// user views other users tweet page
+exports.viewOtherUser = {
+  handler: function (request, reply) {
+    const userId = request.params.id;
+    Tweet.find({ tweeter: userId }).populate('tweeter').then(allTweets => {
+      reply.view('viewotheruser', {
+        title: 'Other Users Tweets',
+        tweets: allTweets,
+        user: userId,
+      });
+    }).catch(err => {
+      reply.redirect('/');
     });
   },
 };
@@ -116,7 +132,7 @@ exports.userRemoveTweet = {
 exports.userRemoveAllTweets = {
   handler: function (request, reply) {
     const userId = request.auth.credentials.loggedInUser;
-    Tweet.remove({tweeter: userId}).then(success => {
+    Tweet.remove({ tweeter: userId }).then(success => {
       reply.redirect('/timeline');
     }).catch(err => {
       reply.redirect(err);
