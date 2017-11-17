@@ -1,0 +1,60 @@
+<!--
+* Author: Gary Fleming
+* Student No: 20019497
+* Start Date: Oct 10th 2017
+-->
+
+<section class="ui inverted teal segment">
+    <section class="ui yellow raised segment">
+        <div class="ui grid">
+            <aside class="six wide column">
+                <img src="../images/tweetList.png" class="ui centered image">
+            </aside>
+
+            {{#if tweets}}
+                <article class="ten wide column">
+                        <table class="ui selectable striped table raised segment">
+                            <thead>
+                            <tr>
+                                <th></th>
+                                <th>Tweets Tweeted by the Tweeter</th>
+                            </tr>
+                            </thead>
+
+                            <tbody class="ui red segment">
+                            {{#each tweets}}
+                                <tr>
+                                    <td></td>
+                                    <td>
+                                        <!-- https://semantic-ui.com/views/comment.html -->
+                                        <div class="ui comments">
+                                            <div class="comment">
+                                                <div class="content">
+                                                    <div class="text">
+                                                        {{text}}
+                                                    </div>
+                                                    <div class="metadata">
+                                                        <div class="email"><i class="grey mail outline icon"></i> {{tweeter.email}}</div>
+                                                        <div class="date"><i class="at icon"></i>{{date}}</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            {{/each}}
+                            </tbody>
+                        </table>
+                    </form>
+                </article>
+            {{else}}
+                <aside class="ten wide column">
+                    <section class="ui center aligned raised segment">
+                        <h2 class="ui red header">No Tweets??? This User is very lazy or very dead!!</h2>
+                        <img src="../images/zombie_twitter.png" class="ui medium centered image">
+                    </section>
+                </aside>
+            {{/if}}
+        </div>
+    </section>
+</section>
