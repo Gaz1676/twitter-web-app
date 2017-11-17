@@ -3,33 +3,6 @@
 const Tweet = require('../models/tweet');
 const Boom = require('boom');
 
-exports.find = {
-
-  auth: false,
-
-  handler: function (request, reply) {
-    Tweet.find({}).exec().then(tweets => {
-      reply(tweets);
-    }).catch(err => {
-      reply(Boom.badImplementation('error accessing db'));
-    });
-  },
-
-};
-
-exports.findOne = {
-
-  auth: false,
-
-  handler: function (request, reply) {
-    Tweet.findOne({ _id: request.params.id }).then(tweet => {
-      reply(tweet);
-    }).catch(err => {
-      reply(Boom.notFound('id not found'));
-    });
-  },
-
-};
 
 exports.create = {
 
@@ -46,15 +19,32 @@ exports.create = {
 
 };
 
-exports.deleteAll = {
+exports.findOne = {
 
   auth: false,
 
   handler: function (request, reply) {
-    Tweet.remove({}).then(err => {
-      reply().code(204);
+    Tweet.findOne({ _id: request.params.id }).then(tweet => {
+      if (tweet != null) {
+        reply(tweet);
+      } else {
+        reply(Boom.notFound('id not found'));}
     }).catch(err => {
-      reply(Boom.badImplementation('error removing tweets'));
+      reply(Boom.notFound('id not found'));
+    });
+  },
+
+};
+
+exports.findAll = {
+
+  auth: false,
+
+  handler: function (request, reply) {
+    Tweet.find({}).exec().then(tweets => {
+      reply(tweets);
+    }).catch(err => {
+      reply(Boom.badImplementation('error accessing db'));
     });
   },
 
@@ -69,6 +59,20 @@ exports.deleteOne = {
       reply(tweet).code(204);
     }).catch(err => {
       reply(Boom.notFound('id not found'));
+    });
+  },
+
+};
+
+exports.deleteAll = {
+
+  auth: false,
+
+  handler: function (request, reply) {
+    Tweet.remove({}).then(err => {
+      reply().code(204);
+    }).catch(err => {
+      reply(Boom.badImplementation('error removing tweets'));
     });
   },
 

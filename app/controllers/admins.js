@@ -68,12 +68,12 @@ exports.registerUser = {
 
 
 // admin views users page
-exports.viewUser = {
+exports.adminViewUser = {
   handler: function (request, reply) {
     const userId = request.params.id;
     Tweet.find({ tweeter: userId }).populate('tweeter').then(allTweets => {
-      reply.view('viewuser', {
-        title: 'Hoots to Date for this user',
+      reply.view('adminviewuser', {
+        title: 'Tweets to Date for user',
         tweets: allTweets,
         user: userId,
       });
@@ -109,6 +109,8 @@ exports.adminRemoveAllTweets = {
     });
   },
 };
+
+
 // admin removes a user
 exports.removeUser = {
   handler: function (request, reply) {

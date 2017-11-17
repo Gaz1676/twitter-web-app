@@ -8,12 +8,11 @@
 
 const mongoose = require('mongoose');
 
-// turn on ES6 promises in order to remove a deprecated warning from console
 mongoose.Promise = global.Promise;
 
-//let dbURI = 'mongodb://twitteruser:twitteruser@ds113925.mlab.com:13925/twitter';
+let dbURI = 'mongodb://twitteruser:twitteruser@ds113925.mlab.com:13925/twitter';
 
-let dbURI = 'mongodb://localhost:12345/tweet';
+//let dbURI = 'mongodb://localhost:12345/tweet';
 
 if (process.env.NODE_ENV === 'production') {
   dbURI = process.env.MONGOLAB_URI;
@@ -35,6 +34,7 @@ mongoose.connection.on('disconnected', function () {
 
 
 //Pre-load/Seed database on startup from data.json
+/*
 mongoose.connection.on('connected', function () {
   console.log('Mongoose connected to ' + dbURI);
   if (process.env.NODE_ENV !== 'production') {
@@ -51,3 +51,4 @@ mongoose.connection.on('connected', function () {
     });
   }
 });
+*/

@@ -8,7 +8,7 @@
     <section class="ui yellow raised segment">
         {{#if users}}
         <article class="eight wide column">
-            <h2 class="ui blue center aligned header">Remove Twitter Users</h2>
+            <h2 class="ui blue center aligned header">Twitter Users & Tweets</h2>
             <table class="ui fixed table">
 
                     <tbody>
@@ -20,14 +20,14 @@
                                     <div class="comment">
                                         <div class="content">
                                             <div class="text">
-                                                <a href="/viewuser/{{id}}">
+                                                <a href="/adminviewuser/{{id}}">
                                                     <h3>
-                                                        <i class="ui blue twitter icon"></i> {{firstName}} {{lastName}}
+                                                        <i class="ui blue twitter icon"></i>{{firstName}} {{lastName}}
                                                     </h3>
                                                 </a>
                                             </div>
                                             <div class="metadata">
-                                                &emsp;&emsp;<i class="at icon"></i>{{email}}
+                                                &emsp;&emsp;<i class="mail outline icon"></i>&nbsp;{{email}}
                                             </div>
                                         </div>
                                     </div>

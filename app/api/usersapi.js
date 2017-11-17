@@ -3,15 +3,16 @@
 const User = require('../models/user');
 const Boom = require('boom');
 
-exports.find = {
+exports.create = {
 
   auth: false,
 
   handler: function (request, reply) {
-    User.find({}).exec().then(users => {
-      reply(users);
+    const user = new User(request.payload);
+    user.save().then(newUser => {
+      reply(newUser).code(201);
     }).catch(err => {
-      reply(Boom.badImplementation('error accessing db'));
+      reply(Boom.badImplementation('error creating user'));
     });
   },
 
@@ -23,7 +24,11 @@ exports.findOne = {
 
   handler: function (request, reply) {
     User.findOne({ _id: request.params.id }).then(user => {
-      reply(user);
+      if (user !== null) {
+        reply(user);
+      } else {
+        reply(Boom.notFound('id not found'));
+      }
     }).catch(err => {
       reply(Boom.notFound('id not found'));
     });
@@ -31,16 +36,15 @@ exports.findOne = {
 
 };
 
-exports.create = {
+exports.findAll = {
 
   auth: false,
 
   handler: function (request, reply) {
-    const user = new User(request.payload);
-    user.save().then(newUser => {
-      reply(newUser).code(201);
+    User.find({}).exec().then(users => {
+      reply(users);
     }).catch(err => {
-      reply(Boom.badImplementation('error creating user'));
+      reply(Boom.badImplementation('error accessing db'));
     });
   },
 

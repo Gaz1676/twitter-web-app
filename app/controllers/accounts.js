@@ -14,7 +14,7 @@ const User = require('../models/user');
 exports.main = {
   auth: false,
   handler: function (request, reply) {
-    reply.view('main', {title: 'Welcome to Twitter'});
+    reply.view('main', { title: 'Welcome to Twitter' });
   },
 };
 
@@ -23,7 +23,7 @@ exports.main = {
 exports.signup = {
   auth: false,
   handler: function (request, reply) {
-    reply.view('signup', {title: 'Sign up for Twitter'});
+    reply.view('signup', { title: 'Sign up for Twitter' });
   },
 };
 
@@ -32,7 +32,7 @@ exports.signup = {
 exports.login = {
   auth: false,
   handler: function (request, reply) {
-    reply.view('login', {title: 'Login to Twitter'});
+    reply.view('login', { title: 'Login to Twitter' });
   },
 };
 
@@ -46,7 +46,7 @@ exports.register = {
     payload: {
       firstName: Joi.string().required(),
       lastName: Joi.string().required(),
-      email: Joi.string().email({unique: true}).required(),
+      email: Joi.string().email({ unique: true }).required(),
       password: Joi.string().min(6).max(20).required(),
     },
 
@@ -78,7 +78,7 @@ exports.authenticate = {
   validate: {
 
     payload: {
-      email: Joi.string().email({unique: true}).required(),
+      email: Joi.string().email({ unique: true }).required(),
       password: Joi.string().min(6).max(20).required(),
     },
     failAction: function (request, reply, source, error) {
@@ -100,7 +100,7 @@ exports.authenticate = {
       });
       reply.redirect('/adminhome');
     } else {
-      User.findOne({email: user.email}).then(foundUser => {
+      User.findOne({ email: user.email }).then(foundUser => {
         if (foundUser && foundUser.password === user.password) {
           request.cookieAuth.set({
             loggedIn: true,
@@ -133,7 +133,7 @@ exports.logout = {
 exports.about = {
   auth: false,
   handler: function (request, reply) {
-    reply.view('about', {title: 'About Twitter'});
+    reply.view('about', { title: 'About Twitter' });
   },
 };
 
@@ -142,8 +142,8 @@ exports.about = {
 exports.viewSettings = {
   handler: function (request, reply) {
     let userId = request.auth.credentials.loggedInUser;
-    User.findOne({_id: userId}).then(foundUser => {
-      reply.view('settings', {title: 'Edit Account Settings', user: foundUser});
+    User.findOne({ _id: userId }).then(foundUser => {
+      reply.view('settings', { title: 'Edit Account Settings', user: foundUser });
     }).catch(err => {
       reply.redirect('/');
     });
@@ -160,7 +160,7 @@ exports.updateSettings = {
     payload: {
       firstName: Joi.string().required(),
       lastName: Joi.string().required(),
-      email: Joi.string().email( { unique: true }).required(),
+      email: Joi.string().email({ unique: true }).required(),
       password: Joi.string().min(6).max(20).required(),
     },
 
@@ -174,14 +174,14 @@ exports.updateSettings = {
   handler: function (request, reply) {
     const editedUser = request.payload;
     let loggedInUserId = request.auth.credentials.loggedInUser;
-    User.findOne({_id: loggedInUserId}).then(user => {
+    User.findOne({ _id: loggedInUserId }).then(user => {
       user.firstName = editedUser.firstName;
       user.lastName = editedUser.lastName;
       user.email = editedUser.email;
       user.password = editedUser.password;
       return user.save();
     }).then(user => {
-      reply.view('settings', {title: 'Edit Account Settings', user: user});
+      reply.view('settings', { title: 'Edit Account Settings', user: user });
     });
   },
 };

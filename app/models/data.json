@@ -12,6 +12,19 @@
       "lastName": "Simpson",
       "email": "marge@simpson.com",
       "password": "secret"
+    },
+    "lisa": {
+      "firstName": "Lisa",
+      "lastName": "Simpson",
+      "email": "lisa@simpson.com",
+      "password": "secret"
+    }
+  },
+  "admins": {
+    "_model": "Admin",
+    "Admin": {
+      "email": "tim@tom.com",
+      "password": "secret"
     }
   },
   "tweets": {
@@ -30,13 +43,6 @@
       "text": "AAGGHHH Mr Burns",
       "date": "4:41 PM - 10th Nov 17",
       "tweeter": "->users.homer"
-    }
-  },
-  "admins": {
-    "_model": "Admin",
-    "admin": {
-      "email": "tim@tom.com",
-      "password": "secret"
     }
   }
 }
