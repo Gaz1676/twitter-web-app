@@ -41,7 +41,7 @@
    
    <a href="https://dry-gorge-60274.herokuapp.com/">Heroku - My Twitter Web App</a>
    
-   <a href="https://twitter-kbtspeidzj.now.sh/">Zeit - My Twitter Web App</a>
+   <a href="https://twitter-zvizybyvcr.now.sh/">Zeit - My Twitter Web App</a>
    
 ***
     
