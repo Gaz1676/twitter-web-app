@@ -2,7 +2,7 @@
 ### Node template
 # Logs
 .idea
-npm-debug.log.542633722
+npm-debug.log
 
 # Dependency directories
 node_modules
