@@ -38,10 +38,8 @@
 #### Deployed Links
 
    <a href="https://twitter-tweet.glitch.me/">Glitch - My Twitter Web App</a>
-   
-   <a href="https://dry-gorge-60274.herokuapp.com/">Heroku - My Twitter Web App</a>
-   
-   <a href="https://twitter-kbtspeidzj.now.sh/">Zeit - My Twitter Web App</a>
+      
+   <a href="https://twitter-zvizybyvcr.now.sh/">V.01 - Zeit - My Twitter Web App</a>
    
 ***
     
