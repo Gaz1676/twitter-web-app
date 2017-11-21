@@ -15,6 +15,7 @@ const userSchema = mongoose.Schema({
   lastName: String,
   email: String,
   password: String,
+  picture: { data: Buffer, contentType: String },
 });
 
 const User = mongoose.model('User', userSchema);
