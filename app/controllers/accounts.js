@@ -100,11 +100,11 @@ exports.authenticate = {
       });
       reply.redirect('/adminhome');
     } else {
-      User.findOne({ email: user.email }).then(foundUser => {
-        if (foundUser && foundUser.password === user.password) {
+      User.findOne({ email: user.email }).then(user => {
+        if (user && user.password === user.password) {
           request.cookieAuth.set({
             loggedIn: true,
-            loggedInUser: foundUser._id,
+            loggedInUser: user._id,
           });
           reply.redirect('/globaltweets');
         } else {
@@ -142,8 +142,8 @@ exports.about = {
 exports.viewSettings = {
   handler: function (request, reply) {
     let userId = request.auth.credentials.loggedInUser;
-    User.findOne({ _id: userId }).then(foundUser => {
-      reply.view('settings', { title: 'Edit Account Settings', user: foundUser });
+    User.findOne({ _id: userId }).then(user => {
+      reply.view('settings', { title: 'Edit Account Settings', user: user });
     }).catch(err => {
       reply.redirect('/');
     });
@@ -173,8 +173,8 @@ exports.updateSettings = {
   },
   handler: function (request, reply) {
     const editedUser = request.payload;
-    let loggedInUserId = request.auth.credentials.loggedInUser;
-    User.findOne({ _id: loggedInUserId }).then(user => {
+    let userId = request.auth.credentials.loggedInUser;
+    User.findOne({ _id: userId }).then(user => {
       user.firstName = editedUser.firstName;
       user.lastName = editedUser.lastName;
       user.email = editedUser.email;
@@ -182,6 +182,37 @@ exports.updateSettings = {
       return user.save();
     }).then(user => {
       reply.view('settings', { title: 'Edit Account Settings', user: user });
+    });
+  },
+};
+
+
+// for uploading a users profile pic
+exports.profile_picture = {
+
+  handler: function (request, reply) {
+    let userId = request.auth.credentials.loggedInUser;
+    let userPic = request.payload.picture;
+    User.findOne({ _id: userId }).then(user => {
+      if (userPic.length) {
+        user.picture.data = userPic;
+        user.save();
+      }
+      reply.redirect('/settings');
+    }).catch(err => {
+      reply.redirect('/');
+    });
+  },
+};
+
+
+exports.getUserPicture = {
+  handler: function (request, reply) {
+    let userId = request.params.id;
+    User.findOne({ _id: userId }).then(user => {
+      reply(user.picture.data).type('image');
+    }).catch(err => {
+      reply.redirect('/');
     });
   },
 };
