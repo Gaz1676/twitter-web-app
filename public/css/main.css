@@ -1,3 +1,14 @@
 body {
     background-image: url("http://res.cloudinary.com/cloud101/image/upload/v1507643172/background_pdphcv.jpg");
+    font-family: 'Lato', serif;
+    font-style: oblique;
+}
+
+/* used pre for spacing of text messages when enter is pressed
+ * set up so the Global text would change
+ */
+pre {
+    font-family: 'Lato', serif;
+    font-style: oblique;
+    font-size: 16px;
 }
