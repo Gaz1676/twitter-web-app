@@ -1,3 +1,3 @@
-$('.metadata').hover(function(){
+$('.email').hover(function(){
   $(this).transition('pulse');
 }, function(){});
