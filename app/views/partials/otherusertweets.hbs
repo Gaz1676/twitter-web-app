@@ -29,12 +29,24 @@
                                         <!-- https://semantic-ui.com/views/comment.html -->
                                         <div class="ui comments">
                                             <div class="comment">
+                                                {{#if tweeter.picture.data}}
+                                                    <a class="ui big avatar image">
+                                                        <img class="ui rounded image" src="/getUserPicture/{{tweeter._id}}">
+                                                    </a>
+                                                {{else}}
+                                                    <a class="avatar">
+                                                        <img class="ui rounded image" src="images/noimage.jpg">
+                                                    </a>
+                                                {{/if}}
+
                                                 <div class="content">
                                                     <div class="text">
                                                         {{text}}
-                                                    </div>
+                                                    </div><br>
+
                                                     <div class="metadata">
-                                                        <div class="email"><i class="grey mail outline icon"></i> {{tweeter.email}}</div>
+                                                        <div>Tweeted by: {{tweeter.firstName}} {{tweeter.lastName}}</div>
+                                                        <br>
                                                         <div class="date"><i class="at icon"></i>{{date}}</div>
                                                     </div>
                                                 </div>
