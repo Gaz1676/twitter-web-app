@@ -139,3 +139,16 @@ exports.userRemoveAllTweets = {
     });
   },
 };
+
+
+// get images rendering to html in tweetlist
+exports.getPicture = {
+  handler: function (request, reply) {
+    let tweetId = request.params.id;
+    Tweet.findOne({ _id: tweetId }).exec((err, tweet) => {
+      if (tweet.picture.data) {
+        reply(tweet.picture.data).type('image');
+      }
+    });
+  },
+};
