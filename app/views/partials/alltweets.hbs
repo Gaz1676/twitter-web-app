@@ -41,15 +41,31 @@
                                 <div class="text">
                                     <pre>     {{text}}</pre>
                                 </div>
-                                <br><br>
+                                <div class="over">
+                                    {{#if picture.data}}
+                                        <div class="image">
+                                            <img src="/getPicture/{{_id}}">
+                                        </div>
+                                    {{/if}}
+                                </div>
+                                <br>
 
                                 <div class="metadata">
                                     &emsp;Tweeted by: {{tweeter.firstName}} {{tweeter.lastName}}<br>
                                     <div class="date">&emsp;<i class="grey at icon"></i>{{date}}</div>&emsp;
-                                    <i class="grey mail outline icon"></i>{{tweeter.email}}
+                                    <i class="grey mail outline icon"></i>{{tweeter.email}}&emsp;
                                 </div>
+
                             </div>
                         </div>
+                    </div>
+                </td>
+
+                <td>
+                    <div class="ui mini buttons">
+                        <button class="ui blue basic submit button" formaction="/follow" value="{{tweeter._id}}">
+                            <i class="twitter icon"></i>Follow
+                        </button>
                     </div>
                 </td>
             </tr>
