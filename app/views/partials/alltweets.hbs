@@ -21,34 +21,33 @@
         {{#if tweets}}
             {{#each tweets}}
             <tr>
-                <td></td>
                 <td>
                     <!-- https://semantic-ui.com/views/comment.html -->
                     <div class="ui comments">
                         <div class="comment">
                             {{#if tweeter.picture.data}}
-                                <a class="ui big avatar image">
-                                    <img class="ui rounded image" src="/getUserPicture/{{tweeter._id}}">
+                                <a href="/viewotheruser/{{tweeter._id}}" class="avatar">
+                                    <div class="ui big avatar image">
+                                        <img class="ui rounded image" src="/getUserPicture/{{tweeter._id}}">
+                                    </div>
                                 </a>
                             {{else}}
-                                <a class="avatar">
+                                <div class="avatar">
                                     <img class="ui rounded image" src="images/noimage.jpg">
-                                </a>
+                                </div>
                             {{/if}}
 
                             <div class="content">
                                 <div class="text">
-                                    <pre>{{text}}</pre>
-                                </div><br>
+                                    <pre>     {{text}}</pre>
+                                </div>
+                                <br><br>
 
                                 <div class="metadata">
-                                    Tweeted by: {{tweeter.firstName}} {{tweeter.lastName}}<br>
-                                    <div class="date"><i class="grey at icon"></i> {{date}}</div>&emsp;
-                                    <a href="/viewotheruser/{{tweeter._id}}" class="email">
-                                        <i class="grey mail outline icon"></i>{{tweeter.email}}
-                                    </a>
+                                    &emsp;Tweeted by: {{tweeter.firstName}} {{tweeter.lastName}}<br>
+                                    <div class="date">&emsp;<i class="grey at icon"></i>{{date}}</div>&emsp;
+                                    <i class="grey mail outline icon"></i>{{tweeter.email}}
                                 </div>
-
                             </div>
                         </div>
                     </div>
@@ -72,4 +71,4 @@
 </section>
 
 <script src="js/tada.js"></script>
-<script src="js/email-pulse.js"></script>
+<script src="js/avatar-jiggle.js"></script>
