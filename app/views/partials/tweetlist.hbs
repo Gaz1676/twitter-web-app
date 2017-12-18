@@ -39,9 +39,15 @@
                                         <div class="ui comments">
                                             <div class="comment">
                                                 <div class="content">
-                                                    <div class="text">
-                                                        {{text}}
-                                               </div>
+                                                    <div class="text">{{text}}</div>
+                                                    <div class="over">
+                                                        {{#if picture.data}}
+                                                            <div class="image">
+                                                                <img src="/getPicture/{{_id}}">
+                                                            </div>
+                                                        {{/if}}
+                                                    </div>
+                                                    <br>
                                                     <div class="metadata">
                                                         <div class="date"><i class="at icon"></i>{{date}}</div>
                                                     </div>
