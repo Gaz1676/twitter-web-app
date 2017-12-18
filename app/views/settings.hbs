@@ -26,10 +26,12 @@
                     <div class="content">
                         <form method="post" enctype="multipart/form-data" action="/profile_picture">
                             <input type="file" name="picture"><br><br>
-                            <button class="ui animated fade blue submit button">
-                                <div class="visible content"><i class="upload icon"></i>Update Profile Picture</div>
-                                <div class="hidden content">Click to Save</div>
-                            </button>
+                            <div class="ui tiny buttons">
+                                <button class="ui animated fade blue submit button">
+                                    <div class="visible content"><i class="upload icon"></i>Update Profile Picture</div>
+                                    <div class="hidden content">Click to Save</div>
+                                </button>
+                            </div>
                         </form>
                         {{> formerror }}
                     </div>
@@ -62,7 +64,7 @@
                             <div class="field">
                                 <label>Email</label>
                                 <div class="ui icon input">
-                                    <input placeholder="{{user.email}}" type="text" name="email">
+                                    <input placeholder="{{user.email}}" type="email" name="email">
                                     <i class="mail icon"></i>
                                 </div>
                             </div>
@@ -75,15 +77,18 @@
                             </div>
                         </div>
 
-                        <button class="ui animated fade blue submit button">
-                            <div class="visible content"><i class="upload icon"></i>Update</div>
-                            <div class="hidden content">Click to Save</div>
-                        </button>
+                        <div class="ui tiny buttons">
+                            <button class="ui animated fade blue submit button">
+                                <div class="visible content"><i class="upload icon"></i>Update</div>
+                                <div class="hidden content">Click to Save</div>
+                            </button>
+                        </div>
                     </form>
 
                     {{> formerror }}
                 </div>
             </div>
+        </div>
         </div>
     </section>
 </section>
