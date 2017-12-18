@@ -40,6 +40,9 @@
    <a href="https://twitter-tweet.glitch.me/">Glitch - My Twitter Web App</a>
       
    <a href="https://twitter-zvizybyvcr.now.sh/">V.01 - Zeit - My Twitter Web App</a>
+
+   <a href="https://twitter-juhluhnibg.now.sh/">V.02 - Zeit - My Twitter Web App (Introduced Tweeter Icons)</a>
+
    
 ***
     
