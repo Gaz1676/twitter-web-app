@@ -36,21 +36,23 @@
                 login: tim@tom.com   |  password: secret
 
 #### Deployed Links
+##### _Glitch_
+   <a href="https://twitter-tweet.glitch.me/">My Twitter Web App</a>
+ ***
+##### _Zeit - My Twitter Web App_
+   <a href="https://twitter-zvizybyvcr.now.sh/">V.01 - Assignment 1 specs completed</a>
 
-   <a href="https://twitter-tweet.glitch.me/">Glitch - My Twitter Web App</a>
-      
-   <a href="https://twitter-zvizybyvcr.now.sh/">V.01 - Zeit - My Twitter Web App</a>
-
-   <a href="https://twitter-juhluhnibg.now.sh/">V.02 - Zeit - My Twitter Web App (Introduced Tweeter Icons)</a>
+   <a href="https://twitter-juhluhnibg.now.sh/">V.02 - Introduction of Tweeter Icons</a>
 
    
 ***
     
-<img src="http://res.cloudinary.com/cloud101/image/upload/c_scale,h_200,w_420/v1507647665/home_qihqjh.png"/> <img src="http://res.cloudinary.com/cloud101/image/upload/c_scale,h_200,w_420/v1507647665/about_khr0px.png"/> 
+<img src="http://res.cloudinary.com/cloud101/image/upload/c_scale,h_200,w_420/v1507647665/home_qihqjh.png"/> <img src="http://res.cloudinary.com/cloud101/image/upload/c_scale,h_200,w_420/v1507647665/about_khr0px.png"/>
 
 <img src="http://res.cloudinary.com/cloud101/image/upload/c_scale,h_200,w_420/v1507647666/signup_pfejyr.png"/> <img src="http://res.cloudinary.com/cloud101/image/upload/c_scale,h_200,w_420/v1507647665/login_ocxxja.png"/>
 
 <img src="http://res.cloudinary.com/cloud101/image/upload/c_scale,h_200,w_420/v1508250163/tweet_gmsl9q.png"/> <img src="http://res.cloudinary.com/cloud101/image/upload/c_scale,h_200,w_420/v1508250164/timeline_rqpj6w.png"/>
 
-<img src="http://res.cloudinary.com/cloud101/image/upload/c_scale,h_200,w_420/v1509707462/globaltweets_raijeg.png"/> <img src="http://res.cloudinary.com/cloud101/image/upload/c_scale,h_200,w_420/v1509707462/admin_tk8f30.png"/>
+<img src="http://res.cloudinary.com/cloud101/image/upload/c_scale,h_200,w_420/v1513624761/globaltweets_lt8mzt.png"/> <img src="http://res.cloudinary.com/cloud101/image/upload/c_scale,h_200,w_420/v1509707462/admin_tk8f30.png"/>
+
 
