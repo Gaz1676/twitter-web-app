@@ -21,11 +21,17 @@
                             <textarea placeholder="What's on your mind..." name="text" rows="4" cols="50"></textarea>
                             <span id='remainingChars'></span>
                         </div>
-                        <br>
-                        <button class="ui animated fade red submit button">
-                            <div class="visible content"><i class="yellow twitter icon"></i>Post</div>
-                            <div class="hidden content">Submit</div>
-                        </button>
+                        <div class="ui field">
+                            <h4>Fancy tweeting a picture?? Well what are you waiting for..</h4>
+                            <input type="file" name="picture">
+                        </div>
+
+                        <div class="ui tiny buttons">
+                            <button class="ui animated fade red submit button">
+                                <div class="visible content"><i class="yellow twitter icon"></i>Post</div>
+                                <div class="hidden content">Submit</div>
+                            </button>
+                        </div>
                     </form>
 
                     {{> formerror }}
