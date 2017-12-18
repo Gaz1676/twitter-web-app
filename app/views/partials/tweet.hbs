@@ -13,7 +13,9 @@
 
             <div class="ui eight wide column">
                 <div class="ui yellow raised fluid form center aligned segment">
-                    <form class="ui form" action="/sendtweet" method="post">
+
+                    <form method="post" enctype="multipart/form-data" action="/sendtweet">
+
                         <div class="ui red field">
                             <h2 class="ui blue header">Extra, Extra Tweet All About It!!</h2>
                             <textarea placeholder="What's on your mind..." name="text" rows="4" cols="50"></textarea>

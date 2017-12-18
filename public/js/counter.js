@@ -1,7 +1,7 @@
-$('textarea').keypress(function(){
+$('textarea').keypress(function () {
 
-  if(this.value.length > 139){
+  if (this.value.length > 139) {
     return false;
   }
-  $("#remainingChars").html("Remaining characters : " +(139 - this.value.length));
+  $('#remainingChars').html('Remaining characters : ' + (139 - this.value.length));
 });

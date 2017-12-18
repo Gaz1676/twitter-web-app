@@ -12,3 +12,14 @@ pre {
     font-style: oblique;
     font-size: 16px;
 }
+
+/* set up if you are uploading an image onto your tweet
+ * aligns and sets size for upload
+ */
+.over img {
+    margin-left: auto;
+    margin-right: auto;
+    width: 300px;
+    height: 150px;
+    display: block;
+}

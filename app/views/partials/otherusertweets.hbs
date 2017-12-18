@@ -16,7 +16,6 @@
                         <table class="ui selectable striped table raised segment">
                             <thead>
                             <tr>
-                                <th></th>
                                 <th>Tweets Tweeted by the Tweeter</th>
                             </tr>
                             </thead>
@@ -24,7 +23,6 @@
                             <tbody class="ui red segment">
                             {{#each tweets}}
                                 <tr>
-                                    <td></td>
                                     <td>
                                         <!-- https://semantic-ui.com/views/comment.html -->
                                         <div class="ui comments">
@@ -41,13 +39,13 @@
 
                                                 <div class="content">
                                                     <div class="text">
-                                                        {{text}}
+                                                        <pre>     {{text}}</pre>
                                                     </div><br>
 
                                                     <div class="metadata">
-                                                        <div>Tweeted by: {{tweeter.firstName}} {{tweeter.lastName}}</div>
+                                                        &emsp;Tweeted by: {{tweeter.firstName}} {{tweeter.lastName}}
                                                         <br>
-                                                        <div class="date"><i class="at icon"></i>{{date}}</div>
+                                                        <div class="date">&emsp;<i class="at icon"></i>{{date}}</div>
                                                     </div>
                                                 </div>
                                             </div>
