@@ -9,10 +9,7 @@
 const Joi = require('joi');
 const User = require('../models/user');
 const Tweet = require('../models/tweet');
-
-// https://www.npmjs.com/package/dateformat
 const DateFormat = require('dateformat');
-
 
 // routes to render globaltweets page
 exports.globalTweets = {
@@ -27,7 +24,6 @@ exports.globalTweets = {
           });
       },
   };
-
 
 // routes to render timeline page
 exports.timeline = {
@@ -67,6 +63,7 @@ exports.sendTweet = {
 
         payload: {
             text: Joi.string().required(),
+            picture: Joi.any().required(),
           },
 
         failAction: function (request, reply, source, error) {
@@ -84,17 +81,32 @@ exports.sendTweet = {
 
     handler: function (request, reply) {
         const userId = request.auth.credentials.loggedInUser;
-        let tweet = request.payload;
-        tweet.tweeter = userId;
-        tweet.date = new Date();
-        tweet.date = DateFormat(tweet.date, 'h:MM TT - dS mmm yy');
-        Tweet.create(tweet).then(newTweet => {
+        User.findOne({ _id: userId }).then(user => {
+            let tweet = request.payload;
+            tweet.tweeter = userId;
+            tweet.date = new Date();
+            tweet.date = DateFormat(tweet.date, 'h:MM TT - dS mmm yy');
+
+            let data = request.payload;
+            if ((data.text !== '') || (data.picture.buffer)) {
+              const tweet = new Tweet(data);
+              if (data.picture.buffer) {
+                tweet.picture.data = data.picture;
+                tweet.picture.contentType = String;
+              }
+
+              tweet.tweeter = user._id;
+              return tweet.save();
+            }
+          }).then(newTweet => {
             reply.redirect('/globaltweets');
           }).catch(err => {
-            reply.redirect(err);
+            reply.redirect('/timeline');
           });
       },
   };
+
+
 
 
 // user views other users tweet page
