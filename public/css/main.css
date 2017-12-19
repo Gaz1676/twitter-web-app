@@ -1,3 +1,4 @@
+/* set background image for all pages & font family & style for text */
 body {
     background-image: url("http://res.cloudinary.com/cloud101/image/upload/v1507643172/background_pdphcv.jpg");
     font-family: 'Lato', serif;
@@ -20,6 +21,11 @@ pre {
     margin-left: auto;
     margin-right: auto;
     width: 200px;
-    height: 200px;
+    height: 150px;
     display: block;
+}
+
+/* sets the color for the raised */
+section.ui.raised.segment{
+    background-color: #e9f5ee;
 }
