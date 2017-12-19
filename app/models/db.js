@@ -34,8 +34,7 @@ mongoose.connection.on('disconnected', function () {
 
 
 //Pre-load/Seed database on startup from data.json
-/*
-mongoose.connection.on('connected', function () {
+/*mongoose.connection.on('connected', function () {
   console.log('Mongoose connected to ' + dbURI);
   if (process.env.NODE_ENV !== 'production') {
     let seeder = require('mongoose-seeder');
@@ -50,5 +49,4 @@ mongoose.connection.on('connected', function () {
       console.log(error);
     });
   }
-});
-*/
+});*/

@@ -106,9 +106,6 @@ exports.sendTweet = {
       },
   };
 
-
-
-
 // user views other users tweet page
 exports.viewOtherUser = {
     handler: function (request, reply) {

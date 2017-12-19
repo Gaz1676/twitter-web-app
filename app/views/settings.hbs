@@ -16,7 +16,7 @@
                     <div class="ui raised fluid form center aligned segment">
                         {{#if user.picture.data}}
                             <div class="image">
-                                <img src="/getUserPicture/{{user.id}}" height="200" width="200"/>
+                                <img src="/getuserpicture/{{user.id}}"/>
                             </div>
                         {{else}}
                             <img class="ui medium centered image" src="images/noimage.jpg">
@@ -24,8 +24,8 @@
                     </div>
 
                     <div class="content">
-                        <form method="post" enctype="multipart/form-data" action="/profile_picture">
-                            <input type="file" name="picture"><br><br>
+                        <form method="post" enctype="multipart/form-data" action="/profilepicture">
+                            <input type="file" name="picture" ><br><br>
                             <div class="ui tiny buttons">
                                 <button class="ui animated fade blue submit button">
                                     <div class="visible content"><i class="upload icon"></i>Update Profile Picture</div>

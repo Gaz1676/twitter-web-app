@@ -21,8 +21,8 @@ module.exports = [
     { method: 'GET', path: '/about', config: Accounts.about },
     { method: 'GET', path: '/settings', config: Accounts.viewSettings },
     { method: 'POST', path: '/settings', config: Accounts.updateSettings },
-    { method: 'POST', path: '/profile_picture', config: Accounts.profile_picture },
-    { method: 'GET', path: '/getUserPicture/{id}', config: Accounts.getUserPicture },
+    { method: 'POST', path: '/profilepicture', config: Accounts.profilePicture },
+    { method: 'GET', path: '/getuserpicture/{id}', config: Accounts.getUserPicture },
 
     // Tweet Routes
     { method: 'GET', path: '/tweet', config: Tweets.tweet },
@@ -32,7 +32,7 @@ module.exports = [
     { method: 'POST', path: '/userremovetweet', config: Tweets.userRemoveTweet },
     { method: 'POST', path: '/userremovealltweets', config: Tweets.userRemoveAllTweets },
     { method: 'GET', path: '/globaltweets', config: Tweets.globalTweets },
-    { method: 'GET', path: '/getPicture/{id}', config: Tweets.getPicture },
+    { method: 'GET', path: '/getpicture/{id}', config: Tweets.getPicture },
 
     // Admin Routes
     { method: 'GET', path: '/adminhome', config: Admins.adminHome },
