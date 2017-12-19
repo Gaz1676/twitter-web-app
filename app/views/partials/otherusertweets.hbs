@@ -7,6 +7,7 @@
 <section class="ui inverted teal segment">
     <section class="ui yellow raised segment">
         <div class="ui grid">
+
             <aside class="six wide column">
                 <img src="../images/tweetList.png" class="ui centered image">
             </aside>
@@ -29,7 +30,7 @@
                                             <div class="comment">
                                                 {{#if tweeter.picture.data}}
                                                     <a class="ui big avatar image">
-                                                        <img class="ui rounded image" src="/getUserPicture/{{tweeter._id}}">
+                                                        <img class="ui rounded image" src="/getuserpicture/{{tweeter._id}}">
                                                     </a>
                                                 {{else}}
                                                     <a class="avatar">
@@ -40,7 +41,14 @@
                                                 <div class="content">
                                                     <div class="text">
                                                         <pre>     {{text}}</pre>
-                                                    </div><br>
+                                                    </div><div class="over">
+                                                    {{#if picture.data}}
+                                                        <div class="image">
+                                                            <img src="/getpicture/{{_id}}">
+                                                        </div>
+                                                    {{/if}}
+                                                </div>
+                                                    <br>
 
                                                     <div class="metadata">
                                                         &emsp;Tweeted by: {{tweeter.firstName}} {{tweeter.lastName}}
