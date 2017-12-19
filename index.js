@@ -13,15 +13,24 @@ let server = new Hapi.Server();
 server.connection({
   port: process.env.PORT || 4000,
   routes: {
-    // validation: reports all errors and not just one
-    // set in routes so it will be used across all files (DRY)
-    validate: {
-      options: {
-        abortEarly: false,
-      },
+
+      // https://stackoverflow.com/questions/45627919/how-to-set-max-image-size-in-joi-hapi
+      payload: {
+          maxBytes: 1000 * 1000 * 5, // increases to 5mb
+        },
+
+      // validation: reports all errors and not just one
+      // set in routes so it will be used across all files (DRY)
+      validate: {
+
+          options: {
+            abortEarly: false,
+          },
+        },
     },
-  },
 });
+
+
 
 require('./app/models/db');
 
