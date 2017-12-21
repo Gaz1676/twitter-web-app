@@ -8,6 +8,8 @@
 
 const Joi = require('joi');
 const User = require('../models/user');
+const Bcrypt = require('bcrypt');
+const saltRounds = 10;
 
 
 // route to render main welcome page
@@ -23,7 +25,8 @@ exports.main = {
 exports.signup = {
     auth: false,
     handler: function (request, reply) {
-        reply.view('signup', { title: 'Sign up for Twitter' });
+        reply.view('signup',
+            { title: 'Sign up for Twitter' });
       },
   };
 
@@ -61,11 +64,17 @@ exports.register = {
     auth: false,
     handler: function (request, reply) {
         const user = new User(request.payload);
+        const plaintextPassword = user.password;
 
-        user.save().then(newUser => {
-            reply.redirect('/login');
-          }).catch(err => {
-            reply.redirect('/');
+        Bcrypt.hash(plaintextPassword, saltRounds, function (err, hash) {
+            user.password = hash;
+            return user.save().then(newUser => {
+                console.log(newUser);
+                reply.redirect('/login');
+              }).catch(err => {
+                console.log(err);
+                reply.redirect('/');
+              });
           });
       },
   };
@@ -100,17 +109,22 @@ exports.authenticate = {
             });
           reply.redirect('/adminhome');
         } else {
-          User.findOne({ email: user.email }).then(user => {
-              if (user && user.password === user.password) {
-                request.cookieAuth.set({
-                    loggedIn: true,
-                    loggedInUser: user._id,
-                  });
-                reply.redirect('/globaltweets');
-              } else {
-                reply.redirect('/signup');
-              }
+          User.findOne({ email: user.email }).then(foundUser => {
+              Bcrypt.compare(user.password, foundUser.password, function (err, isValid) {
+                  if (isValid) {
+                    request.cookieAuth.set({
+                        loggedIn: true,
+                        loggedInUser: user.email,
+                      });
+                    console.log(`>> ` + user.email + ` is now logged in`);
+                    reply.redirect('/globaltweets');
+                  } else {
+                      console.log(`>> Registration needed`);
+                    reply.redirect('/signup');
+                  }
+                });
             }).catch(err => {
+              console.log(`>> Registration needed`);
               reply.redirect('/');
             });
         }
@@ -124,6 +138,7 @@ exports.logout = {
     auth: false,
     handler: function (request, reply) {
         request.cookieAuth.clear();
+        console.log(`>> You are now logged out`);
         reply.redirect('/');
       },
   };
@@ -141,10 +156,11 @@ exports.about = {
 // routes to render view settings page
 exports.viewSettings = {
     handler: function (request, reply) {
-        let userId = request.auth.credentials.loggedInUser;
-        User.findOne({ _id: userId }).then(user => {
+        let loggedInUser = request.auth.credentials.loggedInUser;
+        User.findOne({ email: loggedInUser }).then(user => {
             reply.view('settings', { title: 'Edit Account Settings', user: user });
           }).catch(err => {
+            console.log(err);
             reply.redirect('/');
           });
       },
@@ -173,15 +189,22 @@ exports.updateSettings = {
       },
     handler: function (request, reply) {
         const editedUser = request.payload;
-        let userId = request.auth.credentials.loggedInUser;
-        User.findOne({ _id: userId }).then(user => {
+        let loggedInUser = request.auth.credentials.loggedInUser;
+
+        User.findOne({ email: loggedInUser }).then(user => {
             user.firstName = editedUser.firstName;
             user.lastName = editedUser.lastName;
             user.email = editedUser.email;
-            user.password = editedUser.password;
+            Bcrypt.hash(editedUser.password, saltRounds, function (err, hash) {
+                user.password = hash;
+                user.save();
+              });
             return user.save();
           }).then(user => {
             reply.view('settings', { title: 'Edit Account Settings', user: user });
+          }).catch(err => {
+            console.log(err);
+            reply.redirect('/');
           });
       },
   };
@@ -191,15 +214,17 @@ exports.updateSettings = {
 exports.profilePicture = {
 
     handler: function (request, reply) {
-        let userId = request.auth.credentials.loggedInUser;
+        let loggedInUser = request.auth.credentials.loggedInUser;
         let userPic = request.payload.picture;
-        User.findOne({ _id: userId }).then(user => {
+
+        User.findOne({ email: loggedInUser }).then(user => {
             if (userPic.length) {
               user.picture.data = userPic;
               user.save();
             }
             reply.redirect('/settings');
           }).catch(err => {
+            console.log(err);
             reply.redirect('/');
           });
       },
@@ -212,6 +237,7 @@ exports.getUserPicture = {
         User.findOne({ _id: userId }).then(user => {
             reply(user.picture.data).type('image');
           }).catch(err => {
+            console.log(err);
             reply.redirect('/');
           });
       },
