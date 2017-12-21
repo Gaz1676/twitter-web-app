@@ -8,7 +8,23 @@
     <section class="ui yellow raised segment">
         <div class="ui grid">
             <aside class="six wide column">
-                <img src="images/tweetList.png" class="ui centered image">
+                <div class="ui card">
+                    {{#if user.picture.data}}
+                        <div class="image">
+                            &nbsp;
+                            <h3 class="ui center aligned header">Your Profile {{user.firstName}}</h3>
+                            <img src="/getuserpicture/{{user.id}}"/>
+                        </div>
+                    {{else}}
+                        <img class="ui medium centered image" src="images/noimage.jpg"/>
+                    {{/if}}
+                    <div class="extra content">
+                        <i class="blue mail icon"></i>&nbsp;{{user.email}}<br>
+                        <i class="blue users icon"></i>{{follower.followers.length}} follower(s)<br>
+                        <i class="blue users icon"></i>{{follower.following.length}} following<br>
+                        <i class="blue twitter icon"></i>{{user.post}} posts
+                    </div>
+                </div>
             </aside>
 
             {{#if tweets}}
@@ -29,7 +45,7 @@
                                     <td>
                                         <!-- https://semantic-ui.com/modules/checkbox.html -->
                                         <div class="ui checkbox">
-                                            <input type="checkbox" name="{{_id}}">
+                                            <input type="checkbox" name="{{id}}">
                                             <label></label>
                                         </div>
                                     </td>
