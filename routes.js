@@ -9,6 +9,7 @@ const Tweets = require('./app/controllers/tweets');
 const Assets = require('./app/controllers/assets');
 const Admins = require('./app/controllers/admins');
 
+
 module.exports = [
 
     // Accounts Routes
@@ -33,6 +34,8 @@ module.exports = [
     { method: 'POST', path: '/userremovealltweets', config: Tweets.userRemoveAllTweets },
     { method: 'GET', path: '/globaltweets', config: Tweets.globalTweets },
     { method: 'GET', path: '/getpicture/{id}', config: Tweets.getPicture },
+    { method: 'GET', path: '/follow/{id}', config: Tweets.follow },
+    { method: 'GET', path: '/unfollow/{id}', config: Tweets.unfollow },
 
     // Admin Routes
     { method: 'GET', path: '/adminhome', config: Admins.adminHome },
@@ -42,7 +45,6 @@ module.exports = [
     { method: 'GET', path: '/removeuser/{id}', config: Admins.removeUser },
     { method: 'POST', path: '/adminremovetweet', config: Admins.adminRemoveTweet },
     { method: 'POST', path: '/adminremovealltweets', config: Admins.adminRemoveAllTweets },
-
 
     {
         method: 'GET',
