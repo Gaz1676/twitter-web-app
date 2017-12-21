@@ -25,10 +25,12 @@
                     <!-- https://semantic-ui.com/views/comment.html -->
                     <div class="ui comments">
                         <div class="comment">
+
+                            <!-- https://semantic-ui.com/elements/image.html -->
                             {{#if tweeter.picture.data}}
-                                <a href="/viewotheruser/{{tweeter._id}}" class="avatar">
-                                    <div class="ui big avatar image">
-                                        <img class="ui rounded image" src="/getuserpicture/{{tweeter._id}}">
+                                <a href="/viewotheruser/{{tweeter.id}}" class="avatar">
+                                    <div class="ui massive avatar image">
+                                        <img class="ui image" src="/getuserpicture/{{tweeter.id}}" title="Check out my Profile Page">
                                     </div>
                                 </a>
                             {{else}}
@@ -39,42 +41,53 @@
 
                             <div class="content">
                                 <div class="text">
-                                    <pre>     {{text}}</pre>
+                                    <pre>       {{text}}</pre>
                                 </div>
+
+                                <!-- Tweet image -->
                                 <div class="over">
                                     {{#if picture.data}}
-                                        <div class="image">
-                                            <img src="/getpicture/{{_id}}">
-                                        </div>
+                                        <a href="/getpicture/{{id}}" target="_blank" title="Click for Full Size Image">
+                                            <div class="image">
+                                                <img src="/getpicture/{{id}}">
+                                            </div>
+                                        </a>
                                     {{/if}}
                                 </div>
                                 <br>
 
                                 <div class="metadata">
-                                    &emsp;Tweeted by: {{tweeter.firstName}} {{tweeter.lastName}}<br>
-                                    <div class="date">&emsp;<i class="grey at icon"></i>{{date}}</div>&emsp;
-                                    <i class="grey mail outline icon"></i>{{tweeter.email}}&emsp;
+                                    &emsp;&emsp;Tweeted by: {{tweeter.firstName}} {{tweeter.lastName}}<br>
+                                    <div class="date">&emsp;&emsp;<i class="grey at icon"></i>{{date}}</div>&emsp;
+                                    <i class="grey mail outline icon"></i>{{tweeter.email}}<br>&emsp;&emsp;
+
+                                    <!-- https://semantic-ui.com/modules/rating.html#/examples -->
+                                    <div class="ui mini heart basic button">
+                                        <div class="ui mini heart rating" data-rating="0" data-max-rating="1"></div>&emsp;Like
+                                    </div>
+
+                                    <div class="ui mini basic button">
+                                        <a href="/follow/{{tweeter._id}}"><i class="twitter icon"></i></a>
+                                        Follow
+                                    </div>
+
+                                    <div class="ui mini basic button">
+                                        <a href="/unfollow/{{tweeter._id}}"><i class="twitter icon"></i></a>
+                                        Unfollow
+                                    </div>
                                 </div>
 
                             </div>
                         </div>
                     </div>
                 </td>
-
-                <td>
-                    <div class="ui mini buttons">
-                        <button class="ui blue basic submit button" formaction="/follow" value="{{tweeter._id}}">
-                            <i class="twitter icon"></i>Follow
-                        </button>
-                    </div>
-                </td>
             </tr>
             {{/each}}
         </tbody>
-
         </table>
         </article>
         </div>
+
         {{else}}
             <aside class="ten wide column">
                 <section class="ui center aligned raised segment">
@@ -87,4 +100,6 @@
 </section>
 
 <script src="js/tada.js"></script>
+<script src="js/follow.js"></script>
 <script src="js/avatar-jiggle.js"></script>
+<script src="js/like.js"></script>
