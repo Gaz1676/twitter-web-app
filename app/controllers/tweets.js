@@ -14,12 +14,14 @@ const DateFormat = require('dateformat');
 // routes to render globaltweets page
 exports.globalTweets = {
     handler: function (request, reply) {
-        Tweet.find({}).populate('tweet').populate('tweeter').sort({ date: 'desc' }).then(allTweets => {
+        Tweet.find({}).populate('tweeter').sort({ date: 'desc' }).then(allTweets => {
             reply.view('globaltweets', {
                 title: 'All Tweets To Date',
                 tweets: allTweets,
               });
+            console.log(`>> Global Timeline`);
           }).catch(err => {
+            console.log(err);
             reply.redirect('/');
           });
       },
@@ -28,19 +30,21 @@ exports.globalTweets = {
 // routes to render timeline page
 exports.timeline = {
     handler: function (request, reply) {
-        const userId = request.auth.credentials.loggedInUser;
-        let tweets = null;
-        Tweet.find({ tweeter: userId }).populate('tweet').sort({ date: 'desc' }).then(allTweets => {
-            tweets = allTweets;
-            return User.findOne({ user: userId });
-          }).then(userFound => {
-            reply.view('timeline', {
-                title: 'All Tweets To Date',
-                tweets: tweets,
-                user: userFound,
+        const loggedInUser = request.auth.credentials.loggedInUser;
+
+        User.findOne({ email: loggedInUser }).then(user => {
+            Tweet.find({ tweeter: user.id }).populate('tweet').sort({ date: 'desc' }).then(myTweets => {
+                reply.view('timeline', {
+                    title: 'My Tweets To Date',
+                    tweets: myTweets,
+                    user: user,
+
+                  });
+                console.log(`>> ` + user.email + `'s Timeline`);
+              }).catch(err => {
+                console.log(err);
+                reply.redirect('/');
               });
-          }).catch(err => {
-            reply.redirect('/');
           });
       },
   };
@@ -50,14 +54,16 @@ exports.tweet = {
     handler: function (request, reply) {
         reply.view('tweet', {
             title: 'Make a Tweet',
+
           });
+        console.log(`>> Sending a Tweet page`);
       },
   };
-
 
 // send a tweet
 // error check validation done through Joi
 // makes sure tweetbox is no empty
+// Joi.any() that matches any data type
 exports.sendTweet = {
     validate: {
 
@@ -80,27 +86,30 @@ exports.sendTweet = {
       },
 
     handler: function (request, reply) {
-        const userId = request.auth.credentials.loggedInUser;
-        User.findOne({ _id: userId }).then(user => {
-            let tweet = request.payload;
-            tweet.tweeter = userId;
+        const loggedInUser = request.auth.credentials.loggedInUser;
+        let tweet = request.payload;
+        let data = request.payload;
+
+        User.findOne({ email: loggedInUser }).then(user => {
+
             tweet.date = new Date();
             tweet.date = DateFormat(tweet.date, 'h:MM TT - dS mmm yy');
 
-            let data = request.payload;
+            tweet.tweeter = user.id;
             if ((data.text !== '') || (data.picture.buffer)) {
               const tweet = new Tweet(data);
-              if (data.picture.buffer) {
+              if (data.picture.length) {
                 tweet.picture.data = data.picture;
                 tweet.picture.contentType = String;
               }
 
-              tweet.tweeter = user._id;
               return tweet.save();
             }
           }).then(newTweet => {
+            console.log(`>> Tweet sent by: ` + loggedInUser);
             reply.redirect('/globaltweets');
           }).catch(err => {
+            console.log(err);
             reply.redirect('/timeline');
           });
       },
@@ -110,28 +119,34 @@ exports.sendTweet = {
 exports.viewOtherUser = {
     handler: function (request, reply) {
         const userId = request.params.id;
-        Tweet.find({ tweeter: userId }).populate('tweeter').then(allTweets => {
-            reply.view('viewotheruser', {
-                title: 'Other Users Tweets',
-                tweets: allTweets,
-                user: userId,
+
+        User.findOne({ _id: userId }).then(user => {
+            Tweet.find({ tweeter: userId }).populate('tweeter').populate('user').sort({ date: 'desc' }).then(allTweets => {
+                reply.view('viewotheruser', {
+                    title: 'Users Tweets',
+                    tweets: allTweets,
+                    user: user,
+                    id: userId,
+                  });
               });
           }).catch(err => {
+            console.log(err);
             reply.redirect('/');
           });
       },
   };
 
-
 // user remove a tweet
 exports.userRemoveTweet = {
     handler: function (request, reply) {
         const tweets = Object.keys(request.payload);
+
         tweets.forEach(function (id) {
             Tweet.findByIdAndRemove(id, function (err) {
                 if (err) throw err;
               });
           });
+        console.log(`>> Tweet removed`);
         reply.redirect('/timeline');
       },
   };
@@ -140,11 +155,15 @@ exports.userRemoveTweet = {
 // user remove all tweets
 exports.userRemoveAllTweets = {
     handler: function (request, reply) {
-        const userId = request.auth.credentials.loggedInUser;
-        Tweet.remove({ tweeter: userId }).then(success => {
-            reply.redirect('/timeline');
-          }).catch(err => {
-            reply.redirect(err);
+        const loggedInUser = request.auth.credentials.loggedInUser;
+        User.findOne({ email: loggedInUser }).then(currentUser => {
+            Tweet.remove({ tweeter: currentUser.id }).then(success => {
+                console.log(`>> Removed all Tweets`);
+                reply.redirect('/timeline');
+              }).catch(err => {
+                console.log(err);
+                reply.redirect('/');
+              });
           });
       },
   };
@@ -154,10 +173,55 @@ exports.userRemoveAllTweets = {
 exports.getPicture = {
     handler: function (request, reply) {
         let tweetId = request.params.id;
+
         Tweet.findOne({ _id: tweetId }).exec((err, tweet) => {
             if (tweet.picture.data) {
               reply(tweet.picture.data).type('image');
             }
+          });
+      },
+  };
+
+// follow a user
+exports.follow = {
+    handler: function (request, reply) {
+        let loggedInUser = request.auth.credentials.loggedInUser;
+        let userId = request.params.id;
+
+        User.findOne({ email: loggedInUser }).then(currentUser => {
+            User.findOne({ _id: userId }).then(foundUser => {
+                currentUser.following.push(foundUser._id);
+                foundUser.followers.push(currentUser._id);
+                currentUser.save();
+                foundUser.save();
+                console.log('Following: ' + foundUser.email);
+                reply.redirect('/timeline');
+              });
+          }).catch(err => {
+            console.log(err + ` >> error when trying to follow user`);
+            reply.redirect('/');
+          });
+      },
+  };
+
+// unfollow a user
+exports.unfollow = {
+    handler: function (request, reply) {
+        let loggedInUser = request.auth.credentials.loggedInUser;
+        const userId = request.params.id;
+
+        User.findOne({ email: loggedInUser }).then(currentUser => {
+            User.findOne({ _id: userId }).then(foundUser => {
+                currentUser.following.splice(foundUser._id, 1);
+                foundUser.followers.splice(currentUser._id, 1);
+                currentUser.save();
+                foundUser.save();
+                console.log('Unfollowed: ' + foundUser.email);
+                reply.redirect('/timeline');
+              });
+          }).catch(err => {
+            console.log(err + `error when trying to unfollow User`);
+            reply.redirect('/');
           });
       },
   };
