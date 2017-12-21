@@ -10,18 +10,16 @@
     <section class="ui yellow raised segment">
         <div class="ui grid">
             <aside class="ui six wide column">
-                <section class="ui segment">
-                    <h2 class="ui red center aligned header">Update Your Profile Pic!!</h2>
-
-                    <div class="ui raised fluid form center aligned segment">
-                        {{#if user.picture.data}}
-                            <div class="image">
-                                <img src="/getuserpicture/{{user.id}}"/>
-                            </div>
-                        {{else}}
-                            <img class="ui medium centered image" src="images/noimage.jpg">
-                        {{/if}}
-                    </div>
+                <div class="ui card">
+                    {{#if user.picture.data}}
+                        <div class="image">
+                            &nbsp;
+                            <h3 class="ui center aligned header">{{user.firstName}} {{user.lastName}}'s Profile</h3>
+                            <img src="/getuserpicture/{{user._id}}"/>
+                        </div>
+                    {{else}}
+                        <img class="ui medium centered image" src="images/noimage.jpg"/>
+                    {{/if}}
 
                     <div class="content">
                         <form method="post" enctype="multipart/form-data" action="/profilepicture">
@@ -35,7 +33,7 @@
                         </form>
                         {{> formerror }}
                     </div>
-                </section>
+                </div>
             </aside>
 
             <div class="ui ten wide column">
