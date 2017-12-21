@@ -39,23 +39,27 @@
                                         <div class="ui comments">
                                             <div class="comment">
                                                 {{#if tweeter.picture.data}}
-                                                    <a class="ui big avatar image">
-                                                        <img class="ui rounded image" src="/getuserpicture/{{tweeter._id}}">
-                                                    </a>
+                                                    <div class="ui massive avatar image">
+                                                        <img class="ui image" src="/getuserpicture/{{tweeter._id}}">
+                                                    </div>
                                                 {{else}}
-                                                    <a class="avatar">
+                                                    <div class="avatar">
                                                         <img class="ui rounded image" src="images/noimage.jpg">
-                                                    </a>
+                                                    </div>
                                                 {{/if}}
+
                                                 <div class="content">
                                                     <div class="text">
                                                         <pre>     {{text}}</pre>
                                                     </div>
+
                                                     <div class="over">
                                                         {{#if picture.data}}
-                                                            <div class="image">
-                                                                <img src="/getpicture/{{_id}}">
-                                                            </div>
+                                                            <a href="/getpicture/{{_id}}" target="_blank" title="Click to Enlarge Image">
+                                                                <div class="image">
+                                                                    <img src="/getpicture/{{_id}}">
+                                                                </div>
+                                                            </a>
                                                         {{/if}}
                                                     </div>
                                                     <br>
