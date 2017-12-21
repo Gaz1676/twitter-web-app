@@ -10,18 +10,19 @@
   "author": "Gary Fleming",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^1.0.3",
     "boom": "^6.0.0",
     "dateformat": "latest",
     "handlebars": "^4.0.10",
     "hapi": "^16.6.0",
     "hapi-auth-cookie": "^7.0.0",
     "inert": "^4.2.1",
-    "joi": "^11.4.0",
     "lodash": "^4.17.4",
     "mongoose": "^4.13.1",
     "mongoose-seeder": "^1.2.1",
     "promise": "^8.0.1",
-    "vision": "^4.1.1"
+    "vision": "^4.1.1",
+    "joi": "latest"
   },
   "devDependencies": {
     "chai": "^4.1.2",
