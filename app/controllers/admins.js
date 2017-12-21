@@ -9,7 +9,8 @@
 const Joi = require('joi');
 const User = require('../models/user');
 const Tweet = require('../models/tweet');
-
+const Bcrypt = require('bcrypt');
+const saltRounds = 10;
 
 // admins home page
 exports.adminHome = {
@@ -20,6 +21,7 @@ exports.adminHome = {
         users: allUsers,
       });
     }).catch(err => {
+      console.log(err);
       reply.redirect('/');
     });
   },
@@ -41,29 +43,36 @@ exports.createUser = {
 exports.registerUser = {
   validate: {
 
-    payload: {
-      firstName: Joi.string().required(),
-      lastName: Joi.string().required(),
-      email: Joi.string().email({unique: true}).required(),
-      password: Joi.string().min(6).max(20).required(),
-    },
+      payload: {
+          firstName: Joi.string().regex(/^[A-Z][a-z]{2,}$/).required(),
+          lastName: Joi.string().regex(/^[A-Z]/).min(3).required(),
+          email: Joi.string().email({ unique: true }).required(),
+          password: Joi.string().min(6).max(20).required(),
+        },
 
-    failAction: function (request, reply, source, error) {
-      reply.view('adminhome', {
-        title: 'Failed to Register User',
-        errors: error.data.details,
-      }).code(400);
+      failAction: function (request, reply, source, error) {
+        reply.view('adminhome', {
+          title: 'Failed to Register User',
+          errors: error.data.details,
+        }).code(400);
+      },
     },
-  },
   auth: false,
   handler: function (request, reply) {
-    const user = new User(request.payload);
-    user.save().then(newUser => {
-      reply.redirect('/adminhome');
-    }).catch(err => {
-      reply.redirect('/');
-    });
-  },
+      const user = new User(request.payload);
+      const plaintextPassword = user.password;
+
+      Bcrypt.hash(plaintextPassword, saltRounds, function (err, hash) {
+          user.password = hash;
+          return user.save().then(newUser => {
+              console.log(newUser);
+              reply.redirect('/adminhome');
+            }).catch(err => {
+              console.log(err);
+              reply.redirect('/');
+            });
+        });
+    },
 };
 
 
@@ -71,13 +80,15 @@ exports.registerUser = {
 exports.adminViewUser = {
   handler: function (request, reply) {
     const userId = request.params.id;
+
     Tweet.find({ tweeter: userId }).populate('tweeter').then(allTweets => {
       reply.view('adminviewuser', {
-        title: 'Tweets to Date for user',
+        title: 'Tweets to Date for User',
         tweets: allTweets,
         user: userId,
       });
     }).catch(err => {
+      console.log(err);
       reply.redirect('/');
     });
   },
@@ -88,6 +99,7 @@ exports.adminViewUser = {
 exports.adminRemoveTweet = {
   handler: function (request, reply) {
     const tweets = Object.keys(request.payload);
+
     tweets.forEach(function (id) {
       Tweet.findByIdAndRemove(id, function (err) {
         if (err) throw err;
@@ -102,10 +114,13 @@ exports.adminRemoveTweet = {
 exports.adminRemoveAllTweets = {
   handler: function (request, reply) {
     const userId = request.auth.credentials.loggedInUser;
-    Tweet.remove({tweeter: userId}).then(success => {
+
+    Tweet.remove({ tweeter: userId }).then(success => {
+      console.log(success);
       reply.redirect('/adminhome');
     }).catch(err => {
-      reply.redirect(err);
+      console.log(err);
+      reply.redirect('/adminhome');
     });
   },
 };
@@ -115,13 +130,15 @@ exports.adminRemoveAllTweets = {
 exports.removeUser = {
   handler: function (request, reply) {
     const userId = request.params.id;
+
     Tweet.remove({ tweeter: userId }).then(success => {
-      console.log('Removed User');
+      console.log('Removed User' + success);
       return User.remove({ _id: userId });
     }).then(success => {
+      console.log(success);
       reply.redirect('/adminhome');
     }).catch(err => {
-      console.log('Error Removing User!');
+      console.log('Error Removing User!' + err);
       reply.redirect('/adminhome');
     });
   },
