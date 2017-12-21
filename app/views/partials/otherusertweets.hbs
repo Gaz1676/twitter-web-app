@@ -7,62 +7,83 @@
 <section class="ui inverted teal segment">
     <section class="ui yellow raised segment">
         <div class="ui grid">
-
             <aside class="six wide column">
-                <img src="../images/tweetList.png" class="ui centered image">
+                <div class="ui card">
+                    {{#if user.picture.data}}
+                        <div class="image">
+                            &nbsp;
+                            <h3 class="ui center aligned header">{{user.firstName}} {{user.lastName}}'s Profile</h3>
+                            <img src="/getuserpicture/{{id}}"/>
+                        </div>
+                    {{else}}
+                        <img class="ui medium centered image" src="images/no-image.png"/>
+                    {{/if}}
+                    <div class="extra content">
+                        <i class="blue mail icon"></i>&nbsp;{{user.email}}<br>
+                        <i class="blue users icon"></i>{{user.followers.length}} follower(s)<br>
+                        <i class="blue users icon"></i>{{user.following.length}} following<br>
+                        <i class="blue twitter icon"></i>{{user.post}} posts
+                    </div>
+                </div>
             </aside>
 
             {{#if tweets}}
                 <article class="ten wide column">
-                        <table class="ui selectable striped table raised segment">
-                            <thead>
+                    <table class="ui striped table raised segment">
+                        <thead>
+                        <tr>
+                            <th>
+                                <h3 class="ui center aligned header">All of {{user.firstName}}'s Tweets</h3>
+                            </th>
+                        </tr>
+                        </thead>
+
+                        <tbody class="ui segment">
+                        {{#each tweets}}
                             <tr>
-                                <th>Tweets Tweeted by the Tweeter</th>
-                            </tr>
-                            </thead>
+                                <td>
+                                    <!-- https://semantic-ui.com/views/comment.html -->
+                                    <div class="ui comments">
+                                        <div class="comment">
+                                            {{#if tweeter.picture.data}}
+                                                <div class="ui massive avatar image">
+                                                    <img class="ui image" src="/getuserpicture/{{tweeter.id}}">
+                                                </div>
+                                            {{else}}
+                                                <div class="avatar">
+                                                    <img class="ui rounded image" src="images/noimage.jpg">
+                                                </div>
+                                            {{/if}}
 
-                            <tbody class="ui red segment">
-                            {{#each tweets}}
-                                <tr>
-                                    <td>
-                                        <!-- https://semantic-ui.com/views/comment.html -->
-                                        <div class="ui comments">
-                                            <div class="comment">
-                                                {{#if tweeter.picture.data}}
-                                                    <a class="ui big avatar image">
-                                                        <img class="ui rounded image" src="/getuserpicture/{{tweeter._id}}">
-                                                    </a>
-                                                {{else}}
-                                                    <a class="avatar">
-                                                        <img class="ui rounded image" src="images/noimage.jpg">
-                                                    </a>
-                                                {{/if}}
+                                            <div class="content">
+                                                <div class="text">
+                                                    <pre>     {{text}}</pre>
+                                                </div>
 
-                                                <div class="content">
-                                                    <div class="text">
-                                                        <pre>     {{text}}</pre>
-                                                    </div><div class="over">
+                                                <div class="over">
                                                     {{#if picture.data}}
-                                                        <div class="image">
-                                                            <img src="/getpicture/{{_id}}">
-                                                        </div>
+                                                        <a href="/getpicture/{{id}}" target="_blank" title="Click to Enlarge Image">
+                                                            <div class="image">
+                                                                <img src="/getpicture/{{id}}">
+                                                            </div>
+                                                        </a>
                                                     {{/if}}
                                                 </div>
-                                                    <br>
+                                                <br>
 
-                                                    <div class="metadata">
-                                                        &emsp;Tweeted by: {{tweeter.firstName}} {{tweeter.lastName}}
-                                                        <br>
-                                                        <div class="date">&emsp;<i class="at icon"></i>{{date}}</div>
-                                                    </div>
+                                                <div class="metadata">
+                                                    &emsp;Tweeted by: {{tweeter.firstName}} {{tweeter.lastName}}
+                                                    <br>
+                                                    <div class="date">&emsp;<i class="at icon"></i>{{date}}</div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </td>
-                                </tr>
-                            {{/each}}
-                            </tbody>
-                        </table>
+                                    </div>
+                                </td>
+                            </tr>
+                        {{/each}}
+                        </tbody>
+                    </table>
                     </form>
                 </article>
             {{else}}
