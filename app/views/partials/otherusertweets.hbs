@@ -22,7 +22,15 @@
                         <i class="blue mail icon"></i>&nbsp;{{user.email}}<br>
                         <i class="blue users icon"></i>{{user.followers.length}} follower(s)<br>
                         <i class="blue users icon"></i>{{user.following.length}} following<br>
-                        <i class="blue twitter icon"></i>{{user.post}} posts
+                        <i class="blue twitter icon"></i>{{user.posts.length}} posts
+                        <div class="ui center aligned segment">
+                            <a href="/follow/{{user.id}}">
+                                <button class="ui blue mini basic button"><i class="blue twitter icon"></i>Follow</button>
+                            </a>
+                            <a href="/unfollow/{{user.id}}">
+                                <button class="ui red mini basic button"><i class="red twitter icon"></i>UnFollow</button>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </aside>
