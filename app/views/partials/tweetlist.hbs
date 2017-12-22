@@ -20,9 +20,9 @@
                     {{/if}}
                     <div class="extra content">
                         <i class="blue mail icon"></i>&nbsp;{{user.email}}<br>
-                        <i class="blue users icon"></i>{{follower.followers.length}} follower(s)<br>
-                        <i class="blue users icon"></i>{{follower.following.length}} following<br>
-                        <i class="blue twitter icon"></i>{{user.post}} posts
+                        <i class="blue users icon"></i>{{user.followers.length}} follower(s)<br>
+                        <i class="blue users icon"></i>{{user.following.length}} following<br>
+                        <i class="blue twitter icon"></i>{{user.posts.length}} posts
                     </div>
                 </div>
             </aside>
@@ -79,7 +79,7 @@
                             <tr>
                                 <th colspan="4">
                                     <!-- https://semantic-ui.com/elements/button.html -->
-                                    <div class="ui buttons">
+                                    <div class="ui tiny buttons">
                                         <button class="ui positive button" id="remove_tweet"><i class="trash icon"></i>Selected
                                         </button>
                                         <div class="or" id="or"></div>
