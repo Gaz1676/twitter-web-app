@@ -60,33 +60,18 @@
                                     &emsp;&emsp;Tweeted by: {{tweeter.firstName}} {{tweeter.lastName}}<br>
                                     <div class="date">&emsp;&emsp;<i class="grey at icon"></i>{{date}}</div>&emsp;
                                     <i class="grey mail outline icon"></i>{{tweeter.email}}<br>&emsp;&emsp;
-
-                                    <!-- https://semantic-ui.com/modules/rating.html#/examples -->
-                                    <div class="ui mini heart basic button">
-                                        <div class="ui mini heart rating" data-rating="0" data-max-rating="1"></div>&emsp;Like
-                                    </div>
-
-                                    <div class="ui mini basic button">
-                                        <a href="/follow/{{tweeter._id}}"><i class="twitter icon"></i></a>
-                                        Follow
-                                    </div>
-
-                                    <div class="ui mini basic button">
-                                        <a href="/unfollow/{{tweeter._id}}"><i class="twitter icon"></i></a>
-                                        Unfollow
-                                    </div>
                                 </div>
-
                             </div>
+
                         </div>
                     </div>
                 </td>
-            </tr>
+                </tr>
             {{/each}}
-        </tbody>
-        </table>
-        </article>
-        </div>
+            </tbody>
+            </table>
+            </article>
+            </div>
 
         {{else}}
             <aside class="ten wide column">
@@ -100,6 +85,4 @@
 </section>
 
 <script src="js/tada.js"></script>
-<script src="js/follow.js"></script>
 <script src="js/avatar-jiggle.js"></script>
-<script src="js/like.js"></script>

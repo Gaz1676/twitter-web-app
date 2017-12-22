@@ -109,6 +109,7 @@ exports.authenticate = {
             });
           reply.redirect('/adminhome');
         } else {
+
           User.findOne({ email: user.email }).then(foundUser => {
               Bcrypt.compare(user.password, foundUser.password, function (err, isValid) {
                   if (isValid) {
@@ -119,7 +120,7 @@ exports.authenticate = {
                     console.log(`>> ` + user.email + ` is now logged in`);
                     reply.redirect('/globaltweets');
                   } else {
-                      console.log(`>> Registration needed`);
+                    console.log(`>> Registration needed`);
                     reply.redirect('/signup');
                   }
                 });
@@ -157,6 +158,7 @@ exports.about = {
 exports.viewSettings = {
     handler: function (request, reply) {
         let loggedInUser = request.auth.credentials.loggedInUser;
+
         User.findOne({ email: loggedInUser }).then(user => {
             reply.view('settings', { title: 'Edit Account Settings', user: user });
           }).catch(err => {
@@ -234,6 +236,7 @@ exports.profilePicture = {
 exports.getUserPicture = {
     handler: function (request, reply) {
         let userId = request.params.id;
+
         User.findOne({ _id: userId }).then(user => {
             reply(user.picture.data).type('image');
           }).catch(err => {
