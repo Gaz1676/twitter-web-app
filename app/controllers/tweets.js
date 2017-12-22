@@ -121,7 +121,7 @@ exports.viewOtherUser = {
         const userId = request.params.id;
 
         User.findOne({ _id: userId }).then(user => {
-            Tweet.find({ tweeter: userId }).populate('tweeter').populate('user').sort({ date: 'desc' }).then(allTweets => {
+            Tweet.find({ tweeter: userId }).populate('tweeter').sort({ date: 'desc' }).then(allTweets => {
                 reply.view('viewotheruser', {
                     title: 'Users Tweets',
                     tweets: allTweets,
@@ -194,11 +194,11 @@ exports.follow = {
                 foundUser.followers.push(currentUser._id);
                 currentUser.save();
                 foundUser.save();
-                console.log('Following: ' + foundUser.email);
-                reply.redirect('/timeline');
+                console.log('>> Following: ' + foundUser.email);
+                reply.redirect('/viewotheruser/' + userId);
               });
           }).catch(err => {
-            console.log(err + ` >> error when trying to follow user`);
+            console.log(err + ` >> Error when trying to follow User`);
             reply.redirect('/');
           });
       },
@@ -216,11 +216,11 @@ exports.unfollow = {
                 foundUser.followers.splice(currentUser._id, 1);
                 currentUser.save();
                 foundUser.save();
-                console.log('Unfollowed: ' + foundUser.email);
-                reply.redirect('/timeline');
+                console.log('>> Unfollowed: ' + foundUser.email);
+                reply.redirect('/viewotheruser/' + userId);
               });
           }).catch(err => {
-            console.log(err + `error when trying to unfollow User`);
+            console.log(err + `Error when trying to Unfollow User`);
             reply.redirect('/');
           });
       },
