@@ -8,8 +8,23 @@
     <section class="ui yellow raised segment">
         <div class="ui grid">
             <aside class="six wide column">
-                <img src="../images/tweetList.png" class="ui centered image">
-            </aside>
+                <div class="ui card">
+                    {{#if user.picture.data}}
+                        <div class="image">
+                            &nbsp;
+                            <h3 class="ui center aligned header">{{user.firstName}} {{user.lastName}}'s Profile</h3>
+                            <img src="/getuserpicture/{{id}}"/>
+                        </div>
+                    {{else}}
+                        <img class="ui medium centered image" src="images/no-image.png"/>
+                    {{/if}}
+                    <div class="extra content">
+                        <i class="blue mail icon"></i>&nbsp;{{user.email}}<br>
+                        <i class="blue users icon"></i>{{user.followers.length}} follower(s)<br>
+                        <i class="blue users icon"></i>{{user.following.length}} following<br>
+                        <i class="blue twitter icon"></i>{{user.posts.length}} posts
+                    </div>
+                </div>            </aside>
 
             {{#if tweets}}
                 <article class="ten wide column">
@@ -23,7 +38,7 @@
                             </tr>
                             </thead>
 
-                            <tbody class="ui red segment">
+                            <tbody class="ui segment">
                             {{#each tweets}}
                                 <tr>
                                     <td>
@@ -80,7 +95,7 @@
                             <tr>
                                 <th colspan="4">
                                     <!-- https://semantic-ui.com/elements/button.html -->
-                                    <div class="ui buttons">
+                                    <div class="ui tiny buttons">
                                         <button class="ui positive button" id="remove_tweet"><i class="trash icon"></i>Selected
                                         </button>
                                         <div class="or" id="or"></div>
