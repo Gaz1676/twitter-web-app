@@ -5,6 +5,29 @@
 -->
 
 {{> adminmenu _id = 'adminhome' }}
+<section class="ui inverted teal segment">
+    <section class="ui yellow raised segment">
+        <h2 class="ui blue center aligned header">Registered Users Statistics</h2>
+        <div class="ui yellow three small statistics segment">
+            <div class="ui small statistic">
+                <div class="ui center aligned header">Registered Users</div>
+                <div class="value"><i class="small blue users icon"></i> {{users.length}}</div>
+            </div>
+
+            <div class="ui small statistic">
+                <div class="ui center aligned header">Posted Tweets</div>
+                <div class="value"><i class="small blue twitter icon"></i>{{tweets.length}}</div>
+            </div>
+
+            <div class="ui small statistic">
+                <div class="ui center aligned header">Tweets Per User</div>
+                <div class="value"><i class="small blue pie chart icon"></i>{{avgUsersTweets}}</div>
+            </div>
+
+        </div>
+        <br><br>
+    </section>
+</section>
 
 <div class="ui two column grid basic segment">
     <div class="column">
@@ -64,3 +87,4 @@
 
 
 <script src="js/checkbox.js"></script>
+<script src="js/admin-stats.js"></script>
