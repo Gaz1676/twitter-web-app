@@ -16,17 +16,21 @@ const saltRounds = 10;
 exports.adminHome = {
   handler: function (request, reply) {
     User.find({}).populate('user').then(allUsers => {
-      reply.view('adminhome', {
-        title: 'Admin - All Users',
-        users: allUsers,
+        Tweet.find({}).populate('user').sort({ date: 'desc' }).then(allTweets => {
+            reply.view('adminhome', {
+                title: 'Admin - All Users',
+                users: allUsers,
+                tweets: allTweets,
+                avgUsersTweets: (allTweets.length / allUsers.length).toString().substring(0, 3),
+
+              });
+          }).catch(err => {
+            console.log(err);
+            reply.redirect('/');
+          });
       });
-    }).catch(err => {
-      console.log(err);
-      reply.redirect('/');
-    });
   },
 };
-
 
 // admin creates a new user
 exports.createUser = {
@@ -81,19 +85,21 @@ exports.adminViewUser = {
   handler: function (request, reply) {
     const userId = request.params.id;
 
-    Tweet.find({ tweeter: userId }).populate('tweeter').then(allTweets => {
-      reply.view('adminviewuser', {
-        title: 'Tweets to Date for User',
-        tweets: allTweets,
-        user: userId,
+    User.findOne({ _id: userId }).then(user => {
+        Tweet.find({ tweeter: userId }).populate('tweeter').then(allTweets => {
+            reply.view('adminviewuser', {
+                title: 'Tweets to Date for User',
+                tweets: allTweets,
+                user: user,
+                id: userId,
+              });
+          }).catch(err => {
+            console.log(err);
+            reply.redirect('/');
+          });
       });
-    }).catch(err => {
-      console.log(err);
-      reply.redirect('/');
-    });
   },
 };
-
 
 // admin removes a users tweet
 exports.adminRemoveTweet = {
