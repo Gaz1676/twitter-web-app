@@ -44,7 +44,6 @@ module.exports = [
     { method: 'GET', path: '/adminviewuser/{id}', config: Admins.adminViewUser },
     { method: 'GET', path: '/removeuser/{id}', config: Admins.removeUser },
     { method: 'POST', path: '/adminremovetweet', config: Admins.adminRemoveTweet },
-    { method: 'POST', path: '/adminremovealltweets', config: Admins.adminRemoveAllTweets },
 
     {
         method: 'GET',
