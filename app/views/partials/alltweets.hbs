@@ -34,9 +34,11 @@
                                     </div>
                                 </a>
                             {{else}}
-                                <div class="avatar">
-                                    <img class="ui rounded image" src="images/noimage.jpg">
-                                </div>
+                                <a href="/viewotheruser/{{tweeter.id}}" class="avatar">
+                                    <div class="avatar">
+                                        <img class="ui rounded image" src="images/noimage.jpg">
+                                    </div>
+                                </a>
                             {{/if}}
 
                             <div class="content">
@@ -66,12 +68,12 @@
                         </div>
                     </div>
                 </td>
-                </tr>
+            </tr>
             {{/each}}
-            </tbody>
-            </table>
-            </article>
-            </div>
+        </tbody>
+        </table>
+        </article>
+        </div>
 
         {{else}}
             <aside class="ten wide column">

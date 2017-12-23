@@ -16,15 +16,17 @@
                             <img src="/getuserpicture/{{id}}"/>
                         </div>
                     {{else}}
-                        <img class="ui medium centered image" src="images/no-image.png"/>
+                        <img class="ui medium centered image" src="/images/noimage.jpg"/>
                     {{/if}}
+
                     <div class="extra content">
                         <i class="blue mail icon"></i>&nbsp;{{user.email}}<br>
                         <i class="blue users icon"></i>{{user.followers.length}} follower(s)<br>
                         <i class="blue users icon"></i>{{user.following.length}} following<br>
-                        <i class="blue twitter icon"></i>{{user.posts.length}} posts
+                        <i class="blue twitter icon"></i>{{userStats.posts}} post(s)
                     </div>
-                </div>            </aside>
+                </div>
+            </aside>
 
             {{#if tweets}}
                 <article class="ten wide column">
@@ -59,7 +61,7 @@
                                                     </div>
                                                 {{else}}
                                                     <div class="avatar">
-                                                        <img class="ui rounded image" src="images/noimage.jpg">
+                                                        <img class="ui rounded image" src="/images/noimage.jpg">
                                                     </div>
                                                 {{/if}}
 
@@ -70,9 +72,9 @@
 
                                                     <div class="over">
                                                         {{#if picture.data}}
-                                                            <a href="/getpicture/{{_id}}" target="_blank" title="Click to Enlarge Image">
+                                                            <a href="/getpicture/{{id}}" target="_blank" title="Click to Enlarge Image">
                                                                 <div class="image">
-                                                                    <img src="/getpicture/{{_id}}">
+                                                                    <img src="/getpicture/{{id}}">
                                                                 </div>
                                                             </a>
                                                         {{/if}}
@@ -95,14 +97,10 @@
                             <tr>
                                 <th colspan="4">
                                     <!-- https://semantic-ui.com/elements/button.html -->
-                                    <div class="ui tiny buttons">
-                                        <button class="ui positive button" id="remove_tweet"><i class="trash icon"></i>Selected
-                                        </button>
-                                        <div class="or" id="or"></div>
-                                        <button class="ui negative button" id="remove_all" formaction="/adminremovealltweets">
-                                            All Tweets&emsp;<i class="trash icon"></i>
-                                        </button>
-                                    </div>
+                                    <button class="ui tiny animated fade red submit button">
+                                        <div class="visible content"><i class="trash icon"></i>Selected Tweets</div>
+                                        <div class="hidden content">Are you sure??</div>
+                                    </button>
                                 </th>
                             </tr>
                             </tfoot>

@@ -7,6 +7,7 @@
 <section class="ui inverted teal segment">
     <section class="ui yellow raised segment">
         <div class="ui grid">
+
             <aside class="six wide column">
                 <div class="ui card">
                     {{#if user.picture.data}}
@@ -16,13 +17,15 @@
                             <img src="/getuserpicture/{{id}}"/>
                         </div>
                     {{else}}
-                        <img class="ui medium centered image" src="images/no-image.png"/>
+                        <img class="ui medium centered image" src="/images/noimage.jpg"/>
                     {{/if}}
+
                     <div class="extra content">
                         <i class="blue mail icon"></i>&nbsp;{{user.email}}<br>
                         <i class="blue users icon"></i>{{user.followers.length}} follower(s)<br>
                         <i class="blue users icon"></i>{{user.following.length}} following<br>
-                        <i class="blue twitter icon"></i>{{user.posts.length}} posts
+                        <i class="blue twitter icon"></i>{{userStats.posts}} post(s)
+
                         <div class="ui center aligned segment">
                             <a href="/follow/{{user.id}}">
                                 <button class="ui blue mini basic button"><i class="blue twitter icon"></i>Follow</button>
@@ -59,7 +62,7 @@
                                                 </div>
                                             {{else}}
                                                 <div class="avatar">
-                                                    <img class="ui rounded image" src="images/noimage.jpg">
+                                                    <img class="ui rounded image" src="/images/noimage.jpg">
                                                 </div>
                                             {{/if}}
 
@@ -82,7 +85,7 @@
                                                 <div class="metadata">
                                                     &emsp;Tweeted by: {{tweeter.firstName}} {{tweeter.lastName}}
                                                     <br>
-                                                    <div class="date">&emsp;<i class="at icon"></i>{{date}}</div>
+                                                    <div class="date">&emsp;<i class="at icon"></i>{{date}}</div>&emsp;
                                                 </div>
                                             </div>
                                         </div>
@@ -91,8 +94,8 @@
                             </tr>
                         {{/each}}
                         </tbody>
+
                     </table>
-                    </form>
                 </article>
             {{else}}
                 <aside class="ten wide column">
