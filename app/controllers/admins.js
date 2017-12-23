@@ -22,7 +22,6 @@ exports.adminHome = {
                 users: allUsers,
                 tweets: allTweets,
                 avgUsersTweets: (allTweets.length / allUsers.length).toString().substring(0, 3),
-
               });
           }).catch(err => {
             console.log(err);
@@ -84,14 +83,22 @@ exports.registerUser = {
 exports.adminViewUser = {
   handler: function (request, reply) {
     const userId = request.params.id;
+    let userStats = {};
 
     User.findOne({ _id: userId }).then(user => {
+        const userId = user.id;
+
+        Tweet.count({ tweeter: userId }, function (err, tweets) {
+            userStats.posts = tweets;
+          });
+
         Tweet.find({ tweeter: userId }).populate('tweeter').then(allTweets => {
             reply.view('adminviewuser', {
                 title: 'Tweets to Date for User',
                 tweets: allTweets,
                 user: user,
                 id: userId,
+                userStats: userStats,
               });
           }).catch(err => {
             console.log(err);
@@ -112,22 +119,6 @@ exports.adminRemoveTweet = {
       });
     });
     reply.redirect('/adminhome');
-  },
-};
-
-
-// admin removes all users tweets
-exports.adminRemoveAllTweets = {
-  handler: function (request, reply) {
-    const userId = request.auth.credentials.loggedInUser;
-
-    Tweet.remove({ tweeter: userId }).then(success => {
-      console.log(success);
-      reply.redirect('/adminhome');
-    }).catch(err => {
-      console.log(err);
-      reply.redirect('/adminhome');
-    });
   },
 };
 

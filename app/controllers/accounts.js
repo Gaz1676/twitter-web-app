@@ -107,6 +107,7 @@ exports.authenticate = {
               loggedIn: true,
               LoggedInUser: user.email,
             });
+          console.log('>> You are now logged in as Admin');
           reply.redirect('/adminhome');
         } else {
 
@@ -125,7 +126,7 @@ exports.authenticate = {
                   }
                 });
             }).catch(err => {
-              console.log(`>> Registration needed`);
+              console.log(`>> Registration needed` + err);
               reply.redirect('/');
             });
         }
