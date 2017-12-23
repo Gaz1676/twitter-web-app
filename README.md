@@ -49,13 +49,17 @@
    _<a href="http://ec2-18-216-44-207.us-east-2.compute.amazonaws.com:4000/">My Twitter Web App</a>_
 ***
 ##### _3. Zeit - My Twitter Web App - Releases_
-   _<a href="https://twitter-zvizybyvcr.now.sh/">V.01 - Assignment 1 specs completed</a>_
+   _<a href="https://twitter-zvizybyvcr.now.sh/">V1.0 - Assignment 1 specs completed</a>_
 
-   _<a href="https://twitter-juhluhnibg.now.sh/">V.02 - Introduction of Tweeter Icons</a>_
+   _<a href="https://twitter-juhluhnibg.now.sh/">V2.0 - Introduction of Tweeter Icons</a>_
 
-   _<a href="https://twitter-mmkillbgcm.now.sh/">V.03 - Ability to add Images when creating a tweet</a>_
+   _<a href="https://twitter-mmkillbgcm.now.sh/">V3.0 - Ability to add Images when creating a tweet</a>_
 
-   _<a href="https://twitter-wsrjvrogqf.now.sh/">V.04 - Ability to follow / be followed & unfollow Users</a>_
+   _<a href="https://twitter-wsrjvrogqf.now.sh/">V4.0 - Ability to follow / be followed & unfollow Users</a>_
+
+   _<a href="https://twitter-mflrtjymcy.now.sh/">V5.0 - Ability to view Users Posts</a>_
+
+
 ***
 ##### _4. Aurelia - SPA_
 _<a href="https://twitter-web-aurelia-experiment-yteqvhomxr.now.sh/#/login"/>My Twitter Web Aurelia App</a>_
