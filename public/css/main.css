@@ -1,4 +1,4 @@
-/* set background image for all pages & font family & style for text */
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300,700); /* set background image for all pages & font family & style for text */
 body {
     background-image: url("http://res.cloudinary.com/cloud101/image/upload/v1507643172/background_pdphcv.jpg");
     font-family: 'Lato', serif;
@@ -28,4 +28,19 @@ pre {
 /* sets the color for the raised */
 section.ui.raised.segment{
     background-color: #e9f5ee;
+}
+
+/* layout for popup image */
+#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 998;
+    background:#000 url(http://dbwebb.se/img/loader.gif) no-repeat scroll center center;
+}
+#lightbox {
+    position: fixed;
+    z-index: 999;
 }
