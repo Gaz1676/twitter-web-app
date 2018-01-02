@@ -1,21 +1,93 @@
 <!--
 * Author: Gary Fleming
 * Student No: 20019497
-* Start Date: Oct 10th 2017
+* Date: Jan 7th 2018
 -->
 
 <section class="ui inverted teal segment">
     <section class="ui yellow raised segment">
     <div class="ui grid">
         <aside class="six wide column">
-            <img src="images/global.png" class="ui medium centered image">
+            <section class="ui center aligned segment">
+
+                <!--https://semantic-ui.com/modules/accordion.html#/examples-->
+                <div class="ui accordion">
+                    <div class="title">
+                        <img src="images/global.png" class="ui medium centered image">
+                        <h2><i class="small blue users icon"></i> My Friendship's Status <i class="small blue users icon"></i></h2>
+                        <i class="dropdown icon"></i>
+                    </div>
+
+                    <div class="content">
+                        {{#each users}}
+                        <tr>
+                            <td>
+                                <div class="column">
+                                    {{#if isFollowed}}  <!--if user is followed-->
+                                        <a href="/viewotheruser/{{id}}">
+                                            <h3>
+                                                {{#if picture.data}}
+                                                    <div class="ui avatar image">
+                                                        <img class="ui big image" src="/getuserpicture/{{id}}">
+                                                    </div>
+                                                        {{firstName}} {{lastName}}&emsp;
+                                                    <a href="/unfollow/{{id}}">
+                                                        <button class="ui red mini basic button" title="Click to unfollow">
+                                                            <i class="red twitter icon"></i>UnFollow
+                                                        </button>
+                                                    </a>
+                                                {{else}}
+                                                    <div class="ui avatar image">
+                                                        <img class="ui big image" src="/images/noimage.jpg">
+                                                    </div>
+                                                        {{firstName}} {{lastName}}&emsp;
+                                                    <a href="/unfollow/{{id}}">
+                                                        <button class="ui red mini basic button" title="Click to unfollow">
+                                                            <i class="red twitter icon"></i>UnFollow
+                                                        </button>
+                                                    </a>
+                                                {{/if}}
+                                            </h3>
+                                        </a>
+
+                                    {{else}} <!--if user is unfollowed-->
+                                        <a href="/viewotheruser/{{id}}">
+                                            <h3>
+                                                {{#if picture.data}}
+                                                    <div class="ui avatar image">
+                                                        <img class="ui big image" src="/getuserpicture/{{id}}">
+                                                    </div>
+                                                        {{firstName}} {{lastName}}&emsp;
+                                                    <a href="/follow/{{id}}">
+                                                        <button class="ui blue mini basic button" title="Click to follow">
+                                                            <i class="blue twitter icon"></i>Follow
+                                                        </button>
+                                                    </a>
+                                                {{else}}
+                                                    <div class="ui avatar image">
+                                                        <img class="ui big image" src="/images/noimage.jpg">
+                                                    </div>
+                                                        {{firstName}} {{lastName}}&emsp;
+                                                    <a href="/follow/{{id}}">
+                                                        <button class="ui blue mini basic button" title="Click to follow">
+                                                            <i class="blue twitter icon"></i>Follow
+                                                        </button>
+                                                    </a>
+                                                {{/if}}
+                                            </h3>
+                                        </a>
+                                    {{/if}}
+                                </div>
+                            </td>
+                        {{/each}}
+                    </div>
+                </div>
+            </section>
         </aside>
 
     <article class="ten wide column">
     <table class="ui selectable table raised segment">
-        <h2 class="ui center aligned header segment">
-            Global Timeline Tweets
-        </h2>
+        <h2 class="ui center aligned header segment"> Global Timeline Tweets </h2>
 
     <tbody>
         {{#if tweets}}
@@ -46,14 +118,12 @@
                                     <pre>       {{text}}</pre>
                                 </div>
 
-                                <!-- Tweet image -->
+                                <!-- Tweet image // https://jsfiddle.net/mikael_roos/7bMmE/ -->
                                 <div class="over">
                                     {{#if picture.data}}
-                                        <a href="/getpicture/{{id}}" target="_blank" title="Click for Full Size Image">
-                                            <div class="image">
-                                                <img src="/getpicture/{{id}}">
-                                            </div>
-                                        </a>
+                                        <div class="image">
+                                            <img class='lightbox' src="/getpicture/{{id}}" title="Click to View Full Screen"/>
+                                        </div>
                                     {{/if}}
                                 </div>
                                 <br>
@@ -86,5 +156,9 @@
     </section>
 </section>
 
+
 <script src="js/tada.js"></script>
 <script src="js/avatar-jiggle.js"></script>
+<script src="js/accordion.js"></script>
+<script src="js/friendship-pulse.js"></script>
+<script src="js/image-popup.js"></script>
