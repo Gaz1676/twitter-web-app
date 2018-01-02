@@ -1,7 +1,7 @@
 <!--
 * Author: Gary Fleming
 * Student No: 20019497
-* Start Date: Oct 10th 2017
+* Date: Jan 7th 2018
 -->
 
 {{> mainmenu _id="settings" }}
@@ -9,6 +9,7 @@
 <section class="ui inverted teal segment">
     <section class="ui yellow raised segment">
         <div class="ui grid">
+
             <aside class="ui six wide column">
                 <div class="ui card">
                     {{#if user.picture.data}}
@@ -23,7 +24,7 @@
 
                     <div class="content">
                         <form method="post" enctype="multipart/form-data" action="/profilepicture">
-                            <input type="file" name="picture" ><br><br>
+                            <input type="file" name="picture"><br><br>
                             <div class="ui tiny buttons">
                                 <button class="ui tiny animated fade blue submit button">
                                     <div class="visible content"><i class="upload icon"></i>Update Profile Picture</div>
@@ -87,8 +88,8 @@
                 </div>
             </div>
         </div>
-        </div>
     </section>
 </section>
+
 
 <script src="js/jiggle.js"></script>

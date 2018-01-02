@@ -72,7 +72,7 @@
   "requirePaddingNewLinesBeforeLineComments": {
     "allExcept": "firstAfterCurly"
   },
-  "requirePaddingNewLinesAfterBlocks": false,
+  "requirePaddingNewLinesAfterBlocks": true,
   "requireSemicolons": true,
   "requireShorthandArrowFunctions": true,
   "safeContextKeyword": "_this",

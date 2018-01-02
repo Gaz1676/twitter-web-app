@@ -1,16 +1,18 @@
 <!--
 * Author: Gary Fleming
 * Student No: 20019497
-* Start Date: Oct 10th 2017
+* Date: Jan 7th 2018
 -->
 
 <section class="ui inverted teal segment">
     <section class="ui yellow raised segment">
+
         {{#if users}}
-        <article class="eight wide column">
-            <h2 class="ui blue header">Select a User&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Delete a User</h2>
-            <table class="ui fixed table">
-                <tbody>
+            <article class="eight wide column">
+                <h2 class="ui blue header">Select a User&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Delete a User</h2>
+
+                <table class="ui fixed table">
+                    <tbody>
                     {{#each users}}
                         <tr>
                             <td>
@@ -41,9 +43,10 @@
                                 </div>
                             </td>
                     {{/each}}
-                </tbody>
-            </table>
-        </article>
+                    </tbody>
+                </table>
+            </article>
+
         {{else}}
             <aside class="ten wide column">
                 <section class="ui center aligned segment">

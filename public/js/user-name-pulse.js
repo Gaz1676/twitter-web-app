@@ -1,3 +1,4 @@
-$('.text').hover(function(){
-  $(this).transition('pulse');
-}, function(){});
+$('.text').hover(function () {
+    $(this).transition('pulse');
+  }, function () {
+});

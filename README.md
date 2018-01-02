@@ -12,9 +12,9 @@
     • Allows a User to delete a subset of tweets
     • Allows a User to delete all tweets
     • Allows a user to edit account settings (email, password, and other details)
-    
+
 #### Extra Features
-    
+
     • Ability to view a ‘Global’ timeline, of all tweets from all Users
     • Exposes a simple API - browsable by Insomnia
     • Separate ‘Admin’ account with:
@@ -22,20 +22,20 @@
         ~ Ability to view the timeline of another User
         ~ Ability to add/remove Users
         ~ Ability to delete tweets from any User, individually or in bulk
- 
+
 #### Login Features
 
-                       USERS ACCOUNT LOGIN DETAILS  
+                       USERS ACCOUNT LOGIN DETAILS
                   =====================================
           login: homer@simpson.com   |     login: bart@simpson.com
           password: secret           |     password: secret
           ---------------------------------------------------------
           login: marge@simpson.com   |     login: lisa@simpson.com
           password: secret           |     password: secret
-      
-      
-      
-                       ADMINS ACCOUNT LOGIN DETAILS  
+
+
+
+                       ADMINS ACCOUNT LOGIN DETAILS
                 ========================================
                 login: tim@tom.com   |  password: secret
 
@@ -63,7 +63,7 @@
 ##### _4. Aurelia - SPA_
 _<a href="https://twitter-web-aurelia-experiment-yteqvhomxr.now.sh/#/login"/>My Twitter Web Aurelia App</a>_
 
-   
+
 ***
 ## _Screenshots of My Tweet Web Application_
 #####    _Welcome & About Page_

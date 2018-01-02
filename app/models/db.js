@@ -1,17 +1,16 @@
 /**
  * Author: Gary Fleming
  * Student No: 20019497
- * Start Date: Oct 10th 2017
+ * Date: Jan 7th 2018
  */
 
 'use strict';
 
 const mongoose = require('mongoose');
-
 mongoose.Promise = global.Promise;
 
-let dbURI = 'mongodb://twitteruser:twitteruser@ds113925.mlab.com:13925/twitter';
 
+let dbURI = 'mongodb://twitteruser:twitteruser@ds113925.mlab.com:13925/twitter';
 //let dbURI = 'mongodb://localhost:12345/tweet';
 
 if (process.env.NODE_ENV === 'production') {
