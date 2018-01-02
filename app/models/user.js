@@ -1,14 +1,13 @@
 /**
  * Author: Gary Fleming
  * Student No: 20019497
- * Start Date: Oct 10th 2017
+ * Date: Jan 7th 2018
  */
 
 'use strict';
 
 const mongoose = require('mongoose');
 
-// Module to represent a Schema for a User model
 
 const userSchema = mongoose.Schema({
     firstName: String,
@@ -19,7 +18,7 @@ const userSchema = mongoose.Schema({
     following: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
     posts: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Tweet' }],
     picture: { data: Buffer, contentType: String },
-
+    isFollowed: Boolean,
   });
 
 const User = mongoose.model('User', userSchema);
