@@ -1,3 +1,4 @@
+
 // We need a comparison that will test to see if the returnedUser
 // Is a superset of the newUser object.
 // It is here where we install lodash library
@@ -10,6 +11,7 @@ const TweetService = require('./tweet-service');
 const fixtures = require('./fixtures.json');
 const _ = require('lodash');
 
+
 suite('Tweet API tests', function () {
 
     let tweets = fixtures.tweets;
@@ -21,13 +23,15 @@ suite('Tweet API tests', function () {
     // Clearing our tweets model so that each test
     // can be considered completely independently.
 
+
     beforeEach(function () {
         tweetService.deleteAllTweets();
       });
 
-  /*  afterEach(function () {
-        tweetService.deleteAllTweets();
-      });*/
+    /*  afterEach(function () {
+          tweetService.deleteAllTweets();
+        });*/
+
 
     //=================Create Tweet
     test('create a tweet', function () {

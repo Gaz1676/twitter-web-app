@@ -1,7 +1,7 @@
 <!--
 * Author: Gary Fleming
 * Student No: 20019497
-* Start Date: Oct 10th 2017
+* Date: Jan 7th 2018
 -->
 
 <section class="ui inverted teal segment">
@@ -22,18 +22,9 @@
 
                     <div class="extra content">
                         <i class="blue mail icon"></i>&nbsp;{{user.email}}<br>
+                        <i class="blue twitter icon"></i>{{userStats.posts}} post(s)<br>
                         <i class="blue users icon"></i>{{user.followers.length}} follower(s)<br>
                         <i class="blue users icon"></i>{{user.following.length}} following<br>
-                        <i class="blue twitter icon"></i>{{userStats.posts}} post(s)
-
-                        <div class="ui center aligned segment">
-                            <a href="/follow/{{user.id}}">
-                                <button class="ui blue mini basic button"><i class="blue twitter icon"></i>Follow</button>
-                            </a>
-                            <a href="/unfollow/{{user.id}}">
-                                <button class="ui red mini basic button"><i class="red twitter icon"></i>UnFollow</button>
-                            </a>
-                        </div>
                     </div>
                 </div>
             </aside>
@@ -71,13 +62,12 @@
                                                     <pre>     {{text}}</pre>
                                                 </div>
 
+                                                <!-- Tweet image // https://jsfiddle.net/mikael_roos/7bMmE/ -->
                                                 <div class="over">
                                                     {{#if picture.data}}
-                                                        <a href="/getpicture/{{id}}" target="_blank" title="Click to Enlarge Image">
-                                                            <div class="image">
-                                                                <img src="/getpicture/{{id}}">
-                                                            </div>
-                                                        </a>
+                                                        <div class="image">
+                                                            <img class='lightbox' src="/getpicture/{{id}}" title="Click to View Full Screen"/>
+                                                        </div>
                                                     {{/if}}
                                                 </div>
                                                 <br>
@@ -108,3 +98,5 @@
         </div>
     </section>
 </section>
+
+<script src="../js/image-popup.js"></script>

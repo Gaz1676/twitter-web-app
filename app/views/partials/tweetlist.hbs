@@ -1,12 +1,13 @@
 <!--
 * Author: Gary Fleming
 * Student No: 20019497
-* Start Date: Oct 10th 2017
+* Date: Jan 7th 2018
 -->
 
 <section class="ui inverted teal segment">
     <section class="ui yellow raised segment">
         <div class="ui grid">
+
             <aside class="six wide column">
                 <div class="ui card">
                     {{#if user.picture.data}}
@@ -20,9 +21,9 @@
                     {{/if}}
                     <div class="extra content">
                         <i class="blue mail icon"></i>&nbsp;{{user.email}}<br>
+                        <i class="blue twitter icon"></i>{{userStats.posts}} post(s)<br>
                         <i class="blue users icon"></i>{{user.followers.length}} follower(s)<br>
-                        <i class="blue users icon"></i>{{user.following.length}} following<br>
-                        <i class="blue twitter icon"></i>{{userStats.posts}} post(s)
+                        <i class="blue users icon"></i>{{user.following.length}} following
                     </div>
                 </div>
             </aside>

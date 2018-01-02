@@ -1,7 +1,7 @@
 /**
  * Author: Gary Fleming
  * Student No: 20019497
- * Start Date: Oct 10th 2017
+ * Date: Jan 7th 2018
  */
 
 'use strict';
@@ -161,7 +161,10 @@ exports.viewSettings = {
         let loggedInUser = request.auth.credentials.loggedInUser;
 
         User.findOne({ email: loggedInUser }).then(user => {
-            reply.view('settings', { title: 'Edit Account Settings', user: user });
+            reply.view('settings', {
+                title: 'Edit Account Settings',
+                user: user,
+              });
           }).catch(err => {
             console.log(err);
             reply.redirect('/');
@@ -190,6 +193,7 @@ exports.updateSettings = {
               }).code(400);
           },
       },
+
     handler: function (request, reply) {
         const editedUser = request.payload;
         let loggedInUser = request.auth.credentials.loggedInUser;
@@ -202,6 +206,7 @@ exports.updateSettings = {
                 user.password = hash;
                 user.save();
               });
+
             return user.save();
           }).then(user => {
             reply.view('settings', { title: 'Edit Account Settings', user: user });
@@ -214,7 +219,21 @@ exports.updateSettings = {
 
 
 // for uploading a users profile pic
+// added joi validation as to not upload empty image
 exports.profilePicture = {
+    validate: {
+
+        payload: {
+            picture: Joi.any().required(),
+          },
+
+        failAction: function (request, reply, source, error) {
+            reply.view('settings', {
+                title: 'Upload Image error',
+                errors: error.data.details,
+              }).code(400);
+          },
+      },
 
     handler: function (request, reply) {
         let loggedInUser = request.auth.credentials.loggedInUser;
@@ -225,6 +244,7 @@ exports.profilePicture = {
               user.picture.data = userPic;
               user.save();
             }
+
             reply.redirect('/settings');
           }).catch(err => {
             console.log(err);
@@ -234,6 +254,7 @@ exports.profilePicture = {
   };
 
 
+// used to retrieve users icon picture
 exports.getUserPicture = {
     handler: function (request, reply) {
         let userId = request.params.id;
