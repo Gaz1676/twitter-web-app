@@ -24,6 +24,8 @@ module.exports = [
     { method: 'POST', path: '/settings', config: Accounts.updateSettings },
     { method: 'POST', path: '/profilepicture', config: Accounts.profilePicture },
     { method: 'GET', path: '/getuserpicture/{id}', config: Accounts.getUserPicture },
+    { method: 'GET', path: '/search', config: Accounts.search },
+
 
     // Tweet Routes
     { method: 'GET', path: '/tweet', config: Tweets.tweet },

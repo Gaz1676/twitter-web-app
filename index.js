@@ -1,7 +1,6 @@
 'use strict';
 
 const Hapi = require('hapi');
-const corsHeaders = require('hapi-cors-headers');
 const utils = require('./app/api/utils');
 
 let server = new Hapi.Server();
@@ -70,13 +69,9 @@ server.register([require('inert'), require('vision'), require('hapi-auth-cookie'
         verifyOptions: { algorithms: ['HS256'] },
       });
 
-    // enable the facility with default options
-    server.ext('onPreResponse', corsHeaders);
 
-    // route into the application server
+
     server.route(require('./routes'));
-
-    // new api route included into the application server
     server.route(require('./routesapi'));
 
     server.start((err) => {

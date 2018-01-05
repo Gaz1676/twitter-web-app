@@ -71,13 +71,12 @@
                                                         <pre>     {{text}}</pre>
                                                     </div>
 
+                                                    <!-- Tweet image // https://jsfiddle.net/mikael_roos/7bMmE/ -->
                                                     <div class="over">
                                                         {{#if picture.data}}
-                                                            <a href="/getpicture/{{id}}" target="_blank" title="Click to Enlarge Image">
-                                                                <div class="image">
-                                                                    <img src="/getpicture/{{id}}">
-                                                                </div>
-                                                            </a>
+                                                            <div class="image">
+                                                                <img class='lightbox' src="/getpicture/{{id}}" title="Click to View Full Screen"/>
+                                                            </div>
                                                         {{/if}}
                                                     </div>
                                                     <br>
@@ -121,3 +120,6 @@
         </div>
     </section>
 </section>
+
+<script src="../js/image-pulse.js"></script>
+<script src="../js/image-popup.js"></script>

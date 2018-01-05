@@ -57,14 +57,17 @@
                                             <div class="comment">
                                                 <div class="content">
                                                     <div class="text">{{text}}</div>
+
+                                                    <!-- Tweet image // https://jsfiddle.net/mikael_roos/7bMmE/ -->
                                                     <div class="over">
                                                         {{#if picture.data}}
                                                             <div class="image">
-                                                                <img src="/getpicture/{{_id}}">
+                                                                <img class='lightbox' src="/getpicture/{{id}}" title="Click to View Full Screen"/>
                                                             </div>
                                                         {{/if}}
                                                     </div>
                                                     <br>
+
                                                     <div class="metadata">
                                                         <div class="date"><i class="at icon"></i>{{date}}</div>
                                                     </div>
@@ -96,6 +99,7 @@
                     </form>
                 </article>
             {{else}}
+
                 <aside class="ten wide column">
                     <section class="ui center aligned segment">
                         <h2 class="ui red header">No Tweets??? Why not tweet something!!</h2>
@@ -106,3 +110,6 @@
         </div>
     </section>
 </section>
+
+<script src="js/image-popup.js"></script>
+<script src="js/image-pulse.js"></script>

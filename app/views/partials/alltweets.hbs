@@ -24,58 +24,31 @@
                             <td>
                                 <div class="column">
                                     {{#if isFollowed}}  <!--if user is followed-->
-                                        <a href="/viewotheruser/{{id}}">
-                                            <h3>
-                                                {{#if picture.data}}
-                                                    <div class="ui avatar image">
-                                                        <img class="ui big image" src="/getuserpicture/{{id}}">
-                                                    </div>
-                                                        {{firstName}} {{lastName}}&emsp;
-                                                    <a href="/unfollow/{{id}}">
-                                                        <button class="ui red mini basic button" title="Click to unfollow">
-                                                            <i class="red twitter icon"></i>UnFollow
-                                                        </button>
-                                                    </a>
-                                                {{else}}
-                                                    <div class="ui avatar image">
-                                                        <img class="ui big image" src="/images/noimage.jpg">
-                                                    </div>
-                                                        {{firstName}} {{lastName}}&emsp;
-                                                    <a href="/unfollow/{{id}}">
-                                                        <button class="ui red mini basic button" title="Click to unfollow">
-                                                            <i class="red twitter icon"></i>UnFollow
-                                                        </button>
-                                                    </a>
-                                                {{/if}}
-                                            </h3>
-                                        </a>
 
-                                    {{else}} <!--if user is unfollowed-->
-                                        <a href="/viewotheruser/{{id}}">
                                             <h3>
                                                 {{#if picture.data}}
                                                     <div class="ui avatar image">
                                                         <img class="ui big image" src="/getuserpicture/{{id}}">
                                                     </div>
                                                         {{firstName}} {{lastName}}&emsp;
-                                                    <a href="/follow/{{id}}">
-                                                        <button class="ui blue mini basic button" title="Click to follow">
-                                                            <i class="blue twitter icon"></i>Follow
+                                                    <a href="/unfollow/{{id}}">
+                                                        <button class="ui red mini basic button" title="Click to unfollow">
+                                                            <i class="red twitter icon"></i>UnFollow
                                                         </button>
                                                     </a>
                                                 {{else}}
+
                                                     <div class="ui avatar image">
                                                         <img class="ui big image" src="/images/noimage.jpg">
                                                     </div>
                                                         {{firstName}} {{lastName}}&emsp;
-                                                    <a href="/follow/{{id}}">
-                                                        <button class="ui blue mini basic button" title="Click to follow">
-                                                            <i class="blue twitter icon"></i>Follow
+                                                    <a href="/unfollow/{{id}}">
+                                                        <button class="ui red mini basic button" title="Click to unfollow">
+                                                            <i class="red twitter icon"></i>UnFollow
                                                         </button>
                                                     </a>
                                                 {{/if}}
                                             </h3>
-                                        </a>
                                     {{/if}}
                                 </div>
                             </td>
@@ -100,17 +73,13 @@
 
                             <!-- https://semantic-ui.com/elements/image.html -->
                             {{#if tweeter.picture.data}}
-                                <a href="/viewotheruser/{{tweeter.id}}" class="avatar">
-                                    <div class="ui massive avatar image">
-                                        <img class="ui image" src="/getuserpicture/{{tweeter.id}}" title="Check out my Profile Page">
-                                    </div>
-                                </a>
-                            {{else}}
-                                <a href="/viewotheruser/{{tweeter.id}}" class="avatar">
-                                    <div class="avatar">
-                                        <img class="ui rounded image" src="images/noimage.jpg">
-                                    </div>
-                                </a>
+                                <div class="ui massive avatar image">
+                                    <img class="ui image" src="/getuserpicture/{{tweeter.id}}">
+                                </div>
+                            {{^}}
+                                <div class="avatar">
+                                    <img class="ui rounded image" src="images/noimage.jpg">
+                                </div>
                             {{/if}}
 
                             <div class="content">
@@ -158,7 +127,7 @@
 
 
 <script src="js/tada.js"></script>
-<script src="js/avatar-jiggle.js"></script>
+<script src="js/image-pulse.js"></script>
 <script src="js/accordion.js"></script>
 <script src="js/friendship-pulse.js"></script>
 <script src="js/image-popup.js"></script>

@@ -11,11 +11,12 @@ mongoose.Promise = global.Promise;
 
 
 let dbURI = 'mongodb://twitteruser:twitteruser@ds113925.mlab.com:13925/twitter';
+
 //let dbURI = 'mongodb://localhost:12345/tweet';
 
-if (process.env.NODE_ENV === 'production') {
+/*if (process.env.NODE_ENV === 'production') {
   dbURI = process.env.MONGOLAB_URI;
-}
+}*/
 
 mongoose.connect(dbURI);
 

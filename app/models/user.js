@@ -19,7 +19,7 @@ const userSchema = mongoose.Schema({
     posts: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Tweet' }],
     picture: { data: Buffer, contentType: String },
     isFollowed: Boolean,
-  });
+});
 
 const User = mongoose.model('User', userSchema);
 module.exports = User;

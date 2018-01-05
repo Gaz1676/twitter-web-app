@@ -267,3 +267,36 @@ exports.getUserPicture = {
           });
       },
   };
+
+
+exports.search = {
+    handler: function (request, reply) {
+        const loggedInUser = request.auth.credentials.loggedInUser;
+        let filter = '';
+
+        if (request.query.filter) {
+          filter = request.query.filter;
+        }
+
+        User.find({ email: { $ne: loggedInUser } }).then(foundUsers => {
+            let filteredUsers;
+
+            if (filter === '') {
+              filteredUsers = foundUsers;
+            } else {
+
+              filteredUsers = [];
+              for (let user of foundUsers) {
+                if (user.email.toUpperCase().includes(filter.toUpperCase())) {
+                  filteredUsers.push(user);
+                }
+              }
+            }
+
+            reply.view('search', { title: 'Search Users by email', users: filteredUsers });
+          }).catch(err => {
+              console.log(err);
+              reply.redirect('/');
+            });
+      },
+  };

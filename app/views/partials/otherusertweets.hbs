@@ -24,7 +24,30 @@
                         <i class="blue mail icon"></i>&nbsp;{{user.email}}<br>
                         <i class="blue twitter icon"></i>{{userStats.posts}} post(s)<br>
                         <i class="blue users icon"></i>{{user.followers.length}} follower(s)<br>
-                        <i class="blue users icon"></i>{{user.following.length}} following<br>
+                        <i class="blue users icon"></i>{{user.following.length}} following<br><br>
+
+                        <div class="content">
+                            <tr>
+                                <td>
+                                    <div class="column">
+                                        {{#if isFollowed}}  <!--if user is followed-->
+                                            <a href="/unfollow/{{id}}">
+                                                <button class="ui red mini basic button" title="Click to unfollow">
+                                                    <i class="red twitter icon"></i>UnFollow
+                                                </button>
+                                            </a>
+
+                                        {{else}} <!--if user is unfollowed-->
+                                            <a href="/follow/{{id}}">
+                                                <button class="ui blue mini basic button" title="Click to follow">
+                                                    <i class="blue twitter icon"></i>Follow
+                                                </button>
+                                            </a>
+                                        {{/if}}
+                                    </div>
+                                </td>
+                            </tr>
+                        </div>
                     </div>
                 </div>
             </aside>
@@ -99,4 +122,5 @@
     </section>
 </section>
 
+<script src="../js/image-pulse.js"></script>
 <script src="../js/image-popup.js"></script>

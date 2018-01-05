@@ -11,24 +11,43 @@ const User = require('../models/user');
 const Tweet = require('../models/tweet');
 const DateFormat = require('dateformat');
 
-
 // routes to render globaltweets page
 exports.globalTweets = {
     handler: function (request, reply) {
-        let follow = 1;
+        const loggedInUser = request.auth.credentials.loggedInUser;
 
-        User.find({}).populate('user').then(allUsers => {
-            Tweet.find({}).populate('tweeter').sort({ date: 'desc' }).then(allTweets => {
-                reply.view('globaltweets', {
-                    title: 'All Tweets To Date',
-                    tweets: allTweets,
-                    users: allUsers,
-                    follow: follow,
+        User.findOne({ email: loggedInUser }).then(currentUser => {
+            User.find({ email: { $ne: loggedInUser } }).then(allUsers => {
+                User.find({ _id: currentUser.following }).populate('user').then(followedUsers => {
+                    for (let i = 0; i < allUsers.length; i++) {
+                      if (followedUsers.length !== 0) {
+                        for (let x = 0; x > followedUsers.length; x++) {
+                          console.log('Following: ' + followedUsers[x].firstName);
+                          followedUsers[x].isFollowed = true;
+                        }
+                      } else {
+                        console.log('not following user ' + allUsers[i].firstName);
+                        allUsers[i].isFollowed = false;
+                      }
+                    }
+
+                    const followers = currentUser.followers.length;
+                    const following = currentUser.following.length;
+
+                    Tweet.find({ tweeter: currentUser._id }).populate('tweeter').sort({ date: 'desc' }).then(allTweets => {
+                        reply.view('globaltweets', {
+                            title: 'Global Timeline Tweets',
+                            tweets: allTweets,
+                            users: allUsers,
+                            followers: followers,
+                            following: following,
+                          });
+                        console.log(`>> Global Timeline`);
+                      }).catch(err => {
+                        console.log(err);
+                        reply.redirect('/');
+                      });
                   });
-                console.log(`>> Global Timeline`);
-              }).catch(err => {
-                console.log(err);
-                reply.redirect('/');
               });
           });
       },
@@ -103,7 +122,7 @@ exports.sendTweet = {
     validate: {
 
         payload: {
-            text: Joi.string().required(),
+            text: Joi.string().min(1).max(140).required(),
             picture: Joi.any().required(),
           },
 
@@ -162,11 +181,13 @@ exports.viewOtherUser = {
         User.findOne({ _id: userId }).then(user => {
             const userId = user.id;
 
+            // https://docs.mongodb.com/manual/reference/method/cursor.count/index.html
             Tweet.count({ tweeter: userId }, function (err, tweets) {
                 userStats.posts = tweets;
               });
 
-            User.find({ _id: user.following }).then(followedUser => {
+            // https://docs.mongodb.com/manual/reference/operator/aggregation/ne/index.html
+            User.find({ _id: userId }).then(followedUser => {
                 Tweet.find({ tweeter: userId }).populate('tweeter').sort({ date: 'desc' }).then(allTweets => {
                     if (followedUser.length > 0) {
                       following = true;
@@ -185,7 +206,7 @@ exports.viewOtherUser = {
               });
           }).catch(err => {
             console.log(err);
-            reply.redirect('/globaltweets');
+            reply.redirect('/search');
           });
       },
   };
@@ -252,7 +273,7 @@ exports.follow = {
                 currentUser.save();
                 foundUser.save();
                 console.log('>> Following: ' + foundUser.email);
-                reply.redirect('/viewotheruser/' + userId);
+                reply.redirect('/globaltweets');
               });
           }).catch(err => {
             console.log(err + `>> Error when trying to follow User`);
@@ -276,7 +297,7 @@ exports.unfollow = {
                 currentUser.save();
                 foundUser.save();
                 console.log('>> Unfollowed: ' + foundUser.email);
-                reply.redirect('/globaltweets');
+                reply.redirect('/search');
               });
           }).catch(err => {
             console.log(err + `Error when trying to unfollow User`);

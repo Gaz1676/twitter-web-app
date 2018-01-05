@@ -1,0 +1,71 @@
+{{> mainmenu _id="usersearch" }}
+
+<section class="ui inverted teal segment">
+    <section class="ui yellow raised segment">
+
+        <form class="ui form" action="/search" method="GET">
+            <div class="two inline fields">
+                <div class="three wide field">
+                    <div class="ui selection dropdown">
+                        <input type="hidden" name="filter">
+                        <i class="dropdown icon"></i>
+                        <div class="default text">Select Users by email</div>
+                        <div class="menu">
+                            {{#each users}}
+                                <div class="item">
+                                    {{email}}
+                                </div>
+                            {{/each}}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <div class="ui tiny buttons">
+                        <button class="ui animated fade blue submit right floated button">
+                            <div class="visible content"><i class="search icon"></i>Search</div>
+                            <div class="hidden content">Click me!!</div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <div class="ui divider"></div>
+
+        <div class="ui yellow cards">
+            {{#each users}}
+                <div class="card">
+                    <div class="content">
+                        {{#if tweeter.picture.data}}
+                            <div class="ui massive avatar image">
+                                <img class="ui image" src="/getuserpicture/{{tweeter.id}}">
+                            </div>
+                        {{else}}
+                            <div class="avatar">
+                                <img class="ui rounded image" src="/images/noimage.jpg">
+                            </div>
+                        {{/if}}                        <div class="meta">
+                            &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<i class="users icon"></i>{{followers.length}} Follower(s)<br/>
+                            {{firstName}} {{lastName}}<br>
+                            {{email}}<br>
+                        </div>
+                    </div>
+
+                    <div class="extra content">
+                        <form action="/viewotheruser/{{id}}" method="GET">
+                            <div class="ui tiny buttons">
+                                <button class="ui animated fade red submit right floated button">
+                                    <div class="visible content">{{firstName}}'s Timeline</div>
+                                    <div class="hidden content">Lets go!!</div>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            {{/each}}
+        </div>
+    </section>
+</section>
+
+<script src="js/card-pulse.js"></script>
