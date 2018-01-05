@@ -41,14 +41,19 @@
 
 ### Deployed Links
 ***
-##### _1. Glitch_
+
+##### _1. Heroku_
+   _<a href ="https://twitter-web.herokuapp.com/"> My Twitter Web App</a>_
+***
+   
+##### _2. Glitch_
    _<a href="https://twitter-tweet.glitch.me/">My Twitter Web App</a>_
  ***
 
-##### _2. Amazon - (with m-lab mongo database)_
+##### _3. Amazon - (with m-lab mongo database)_
    _<a href="http://ec2-18-216-44-207.us-east-2.compute.amazonaws.com:4000/">My Twitter Web App</a>_
 ***
-##### _3. Zeit - My Twitter Web App - Releases_
+##### _4. Zeit - My Twitter Web App - Releases_
 
    _<a href="https://twitter-juhluhnibg.now.sh/">V1.0 - Introduction of Tweeter Icons</a>_
 
@@ -60,7 +65,7 @@
 
 
 ***
-##### _4. Aurelia - SPA_
+##### _5. Aurelia - SPA_
 _<a href="https://twitter-web-aurelia-experiment-yteqvhomxr.now.sh/#/login"/>My Twitter Web Aurelia App</a>_
 
 
