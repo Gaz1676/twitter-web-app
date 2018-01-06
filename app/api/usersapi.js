@@ -3,7 +3,7 @@
 const User = require('../models/user');
 const Boom = require('boom');
 const utils = require('./utils.js');
-const bcrypt = require('bcrypt');
+const Bcrypt = require('bcrypt');
 const saltRounds = 10;
 
 
@@ -42,7 +42,7 @@ exports.create = {
     auth: false,
     handler: function (request, reply) {
         const user = new User(request.payload);
-        bcrypt.hash(user.password, saltRounds, function (err, hash) {
+        Bcrypt.hash(user.password, saltRounds, function (err, hash) {
             user.password = hash;
             user.save().then(newUser => {
                 reply(newUser).code(201);
@@ -59,8 +59,13 @@ exports.update = {
     auth: false,
     handler: function (request, reply) {
         const user = User(request.payload);
-        bcrypt.hash(user.password, saltRounds, function (err, hash) {
-            user.password = hash;
+        Bcrypt.hash(user.password, saltRounds, function (err, hash) {
+            if (user.password != '') {
+              user.password = hash;
+            } else {
+              user.password = oldUser.password;
+            }
+
             console.log(user);
             user.update(user).then(updatedUser => {
                 reply(updatedUser).code(201);
@@ -70,6 +75,7 @@ exports.update = {
           });
       },
   };
+
 
 
 exports.deleteAll = {
@@ -104,7 +110,7 @@ exports.authenticate = {
     handler: function (request, reply) {
         const user = request.payload;
         User.findOne({ email: user.email }).then(foundUser => {
-            bcrypt.compare(user.password, foundUser.password, function (err, isUser) {
+            Bcrypt.compare(user.password, foundUser.password, function (err, isUser) {
                 if (isUser) {
                   reply(foundUser).code(201);
                 } else {
