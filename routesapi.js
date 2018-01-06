@@ -7,9 +7,8 @@ module.exports = [
     { method: 'POST', path: '/api/users', config: UsersApi.create },
     { method: 'DELETE', path: '/api/users/{id}', config: UsersApi.deleteOne },
     { method: 'DELETE', path: '/api/users', config: UsersApi.deleteAll },
+
     { method: 'PUT', path: '/api/users', config: UsersApi.update },
-
-
     { method: 'POST', path: '/api/users/authenticate', config: UsersApi.authenticate },
 
     { method: 'GET', path: '/api/tweets', config: TweetsApi.find },

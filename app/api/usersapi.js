@@ -59,11 +59,14 @@ exports.update = {
     auth: false,
     handler: function (request, reply) {
         const user = User(request.payload);
-        console.log(user);
-        user.update(user).then(updatedUser => {
-            reply(updatedUser).code(201);
-          }).catch(err => {
-            reply(Boom.badImplementation('error updating User'));
+        bcrypt.hash(user.password, saltRounds, function (err, hash) {
+            user.password = hash;
+            console.log(user);
+            user.update(user).then(updatedUser => {
+                reply(updatedUser).code(201);
+              }).catch(err => {
+                reply(Boom.badImplementation('error updating User'));
+              });
           });
       },
   };
