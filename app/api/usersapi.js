@@ -59,18 +59,20 @@ exports.update = {
     auth: false,
     handler: function (request, reply) {
         const user = User(request.payload);
-        Bcrypt.hash(user.password, saltRounds, function (err, hash) {
-            if (user.password != '') {
-              user.password = hash;
-            } else {
-              user.password = oldUser.password;
-            }
+        User.findOne({ _id: user._id }).then(oldUser => {
+            Bcrypt.hash(user.password, saltRounds, function (err, hash) {
+                if (user.password != '') {
+                  user.password = hash;
+                } else {
+                  user.password = oldUser.password;
+                }
 
-            console.log(user);
-            user.update(user).then(updatedUser => {
-                reply(updatedUser).code(201);
-              }).catch(err => {
-                reply(Boom.badImplementation('error updating User'));
+                console.log(user);
+                user.update(user).then(updatedUser => {
+                    reply(updatedUser).code(201);
+                  }).catch(err => {
+                    reply(Boom.badImplementation('error updating User'));
+                  });
               });
           });
       },
