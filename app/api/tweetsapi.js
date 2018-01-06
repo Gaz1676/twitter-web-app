@@ -1,7 +1,5 @@
 const Tweet = require('../models/tweet');
 const Boom = require('boom');
-const utils = require('./utils.js');
-
 
 exports.find = {
 
