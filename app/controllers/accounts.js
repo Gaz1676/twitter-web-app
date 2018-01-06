@@ -47,10 +47,10 @@ exports.register = {
     validate: {
 
         payload: {
-            firstName: Joi.string().regex(/^[A-Z][a-z]{2,}$/).required(),
-            lastName: Joi.string().regex(/^[A-Z]/).min(3).required(),
+            firstName: Joi.string().regex(/^[a-z]{2,}$/).required(),
+            lastName: Joi.string().regex(/^[a-z]/).min(3).required(),
             email: Joi.string().email({ unique: true }).required(),
-            password: Joi.string().min(6).max(20).required(),
+            password: Joi.string().max(20).required(),
           },
 
         failAction: function (request, reply, source, error) {
@@ -88,7 +88,7 @@ exports.authenticate = {
 
         payload: {
             email: Joi.string().email({ unique: true }).required(),
-            password: Joi.string().min(6).max(20).required(),
+            password: Joi.string().max(20).required(),
           },
         failAction: function (request, reply, source, error) {
             reply.view('login', {
@@ -180,15 +180,15 @@ exports.updateSettings = {
     validate: {
 
         payload: {
-            firstName: Joi.string().regex(/^[A-Z][a-z]{2,}$/).required(),
-            lastName: Joi.string().regex(/^[A-Z]/).min(3).required(),
+            firstName: Joi.string().regex(/^[a-z]{2,}$/).required(),
+            lastName: Joi.string().regex(/^[a-z]/).min(3).required(),
             email: Joi.string().email({ unique: true }).required(),
-            password: Joi.string().min(6).max(20).required(),
+            password: Joi.string().max(20).required(),
           },
 
         failAction: function (request, reply, source, error) {
             reply.view('settings', {
-                title: 'Settings error',
+                title: 'Update settings error',
                 errors: error.data.details,
               }).code(400);
           },

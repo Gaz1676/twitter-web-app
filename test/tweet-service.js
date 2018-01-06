@@ -57,8 +57,8 @@ class TweetService {
   }
 
   authenticate(user) {
-        return this.httpService.post('/api/users/authenticate', user);
-    }
+    return this.httpService.post('/api/users/authenticate', user);
+  }
 
 }
 

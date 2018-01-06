@@ -1,8 +1,6 @@
 'use strict';
 
 const Hapi = require('hapi');
-const utils = require('./app/api/utils');
-
 let server = new Hapi.Server();
 
 
@@ -30,7 +28,7 @@ server.connection({
 require('./app/models/db');
 
 // plugins registration
-server.register([require('inert'), require('vision'), require('hapi-auth-cookie'), require('hapi-auth-jwt2')], err => {
+server.register([require('inert'), require('vision'), require('hapi-auth-cookie')], err => {
 
     if (err) {
       throw err;
@@ -52,24 +50,15 @@ server.register([require('inert'), require('vision'), require('hapi-auth-cookie'
     // cookie plugin
     server.auth.strategy('standard', 'cookie', {
         password: 'secretpasswordnotrevealedtoanyone',
-        cookie: 'donation-cookie',
+        cookie: 'twitter-cookie',
         isSecure: false,
         ttl: 24 * 60 * 60 * 1000,
         redirectTo: '/login',
       });
 
-    // strategy set to all routes
     server.auth.default({
         strategy: 'standard',
       });
-
-    server.auth.strategy('jwt', 'jwt', {
-        key: 'secretpasswordnotrevealedtoanyone',
-        validateFunc: utils.validate,
-        verifyOptions: { algorithms: ['HS256'] },
-      });
-
-
 
     server.route(require('./routes'));
     server.route(require('./routesapi'));
@@ -81,5 +70,4 @@ server.register([require('inert'), require('vision'), require('hapi-auth-cookie'
 
         console.log('Server listening at:', server.info.uri);
       });
-
   });
