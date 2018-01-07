@@ -274,7 +274,10 @@ exports.search = {
         const loggedInUser = request.auth.credentials.loggedInUser;
 
         User.find({ email: { $ne: loggedInUser } }).then(foundUsers => {
-            reply.view('search', { title: 'Search Users by email', users: foundUsers });
+            reply.view('search', {
+                title: 'Search Users by email',
+                users: foundUsers,
+            });
           }).catch(err => {
             console.log(err);
             reply.redirect('/');
