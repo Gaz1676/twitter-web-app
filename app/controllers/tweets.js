@@ -14,40 +14,20 @@ const DateFormat = require('dateformat');
 // routes to render globaltweets page
 exports.globalTweets = {
     handler: function (request, reply) {
-        const loggedInUser = request.auth.credentials.loggedInUser;
+        let follow;
 
-        User.findOne({ email: loggedInUser }).then(currentUser => {
-            User.find({ email: { $ne: loggedInUser } }).then(allUsers => {
-                User.find({ _id: currentUser.following }).populate('user').then(followedUsers => {
-                    for (let i = 0; i < allUsers.length; i++) {
-                      if (followedUsers.length !== 0) {
-                        for (let x = 0; x > followedUsers.length; x++) {
-                          console.log('Following: ' + followedUsers[x].firstName);
-                          followedUsers[x].isFollowed = true;
-                        }
-                      } else {
-                        console.log('not following user ' + allUsers[i].firstName);
-                        allUsers[i].isFollowed = false;
-                      }
-                    }
-
-                    const followers = currentUser.followers.length;
-                    const following = currentUser.following.length;
-
-                    Tweet.find({ tweeter: currentUser._id }).populate('tweeter').sort({ date: 'desc' }).then(allTweets => {
-                        reply.view('globaltweets', {
-                            title: 'Global Timeline Tweets',
-                            tweets: allTweets,
-                            users: allUsers,
-                            followers: followers,
-                            following: following,
-                          });
-                        console.log(`>> Global Timeline`);
-                      }).catch(err => {
-                        console.log(err);
-                        reply.redirect('/');
-                      });
+        User.find({}).populate('user').then(allUsers => {
+            Tweet.find({}).populate('tweeter').sort({ date: 'desc' }).then(allTweets => {
+                reply.view('globaltweets', {
+                    title: 'All Tweets To Date',
+                    tweets: allTweets,
+                    users: allUsers,
+                    follow: follow,
                   });
+                console.log(`>> Global Timeline`);
+              }).catch(err => {
+                console.log(err);
+                reply.redirect('/');
               });
           });
       },
@@ -147,7 +127,7 @@ exports.sendTweet = {
 
             // setting date format from payload
             tweetData.date = new Date();
-            tweetData.date = DateFormat(tweetData.date, 'h:MM TT - dS mmm yy');
+            tweetData.date = DateFormat(tweetData.date, 'mmm dS yyyy, H:mm:ss TT');
 
             // setting image for tweet
             tweetData.tweeter = user.id;

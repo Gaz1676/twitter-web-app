@@ -47,8 +47,8 @@ exports.register = {
     validate: {
 
         payload: {
-            firstName: Joi.string().regex(/^[a-z]{2,}$/).required(),
-            lastName: Joi.string().regex(/^[a-z]/).min(3).required(),
+            firstName: Joi.string().regex(/^[A-Z][a-z]{2,}$/).required(),
+            lastName: Joi.string().regex(/^[A-Z][a-z]/).min(3).required(),
             email: Joi.string().email({ unique: true }).required(),
             password: Joi.string().max(20).required(),
           },
@@ -180,8 +180,8 @@ exports.updateSettings = {
     validate: {
 
         payload: {
-            firstName: Joi.string().regex(/^[a-z]{2,}$/).required(),
-            lastName: Joi.string().regex(/^[a-z]/).min(3).required(),
+            firstName: Joi.string().regex(/^[A-Z][a-z]{2,}$/).required(),
+            lastName: Joi.string().regex(/^[A-Z][a-z]/).min(3).required(),
             email: Joi.string().email({ unique: true }).required(),
             password: Joi.string().max(20).required(),
           },
@@ -272,31 +272,12 @@ exports.getUserPicture = {
 exports.search = {
     handler: function (request, reply) {
         const loggedInUser = request.auth.credentials.loggedInUser;
-        let filter = '';
-
-        if (request.query.filter) {
-          filter = request.query.filter;
-        }
 
         User.find({ email: { $ne: loggedInUser } }).then(foundUsers => {
-            let filteredUsers;
-
-            if (filter === '') {
-              filteredUsers = foundUsers;
-            } else {
-
-              filteredUsers = [];
-              for (let user of foundUsers) {
-                if (user.email.toUpperCase().includes(filter.toUpperCase())) {
-                  filteredUsers.push(user);
-                }
-              }
-            }
-
-            reply.view('search', { title: 'Search Users by email', users: filteredUsers });
+            reply.view('search', { title: 'Search Users by email', users: foundUsers });
           }).catch(err => {
-              console.log(err);
-              reply.redirect('/');
-            });
+            console.log(err);
+            reply.redirect('/');
+          });
       },
   };

@@ -2,36 +2,7 @@
 
 <section class="ui inverted teal segment">
     <section class="ui yellow raised segment">
-
-        <form class="ui form" action="/search" method="GET">
-            <div class="two inline fields">
-                <div class="three wide field">
-                    <div class="ui selection dropdown">
-                        <input type="hidden" name="filter">
-                        <i class="dropdown icon"></i>
-                        <div class="default text">Select Users by email</div>
-                        <div class="menu">
-                            {{#each users}}
-                                <div class="item">
-                                    {{email}}
-                                </div>
-                            {{/each}}
-                        </div>
-                    </div>
-                </div>
-
-                <div class="field">
-                    <div class="ui tiny buttons">
-                        <button class="ui animated fade blue submit right floated button">
-                            <div class="visible content"><i class="search icon"></i>Search</div>
-                            <div class="hidden content">Click me!!</div>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </form>
-
-        <div class="ui divider"></div>
+        <h2 class="ui center aligned header segment"> All Twitter Users Accounts </h2>
 
         <div class="ui yellow cards">
             {{#each users}}

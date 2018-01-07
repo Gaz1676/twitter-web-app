@@ -111,6 +111,7 @@ exports.authenticate = {
     auth: false,
     handler: function (request, reply) {
         const user = request.payload;
+
         User.findOne({ email: user.email }).then(foundUser => {
             Bcrypt.compare(user.password, foundUser.password, function (err, isUser) {
                 if (isUser) {
