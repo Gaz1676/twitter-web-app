@@ -51,7 +51,7 @@
  ***
 
 ##### _3. Amazon - (with m-lab mongo database)_
-   _<a href="http://ec2-18-218-109-64.us-east-2.compute.amazonaws.com:4000/">My Twitter Web App</a>_
+   _<a href="http://ec2-18-218-10-132.us-east-2.compute.amazonaws.com:4000/">My Twitter Web App</a>_
 ***
 ##### _4. Zeit - My Twitter Web App - Releases_
 
@@ -64,10 +64,6 @@
    _<a href="https://twitter-mflrtjymcy.now.sh/">V4.0 - Ability to view Users Posts</a>_
    
    _<a href="https://twitter-web-odzqlhnras.now.sh/">V5.0 - Fully connected through API's to Mobile App</a>_
-
-***
-##### _5. Aurelia - SPA_
-_<a href="https://twitter-web-aurelia-experiment-yteqvhomxr.now.sh/#/login"/>My Twitter Web Aurelia App</a>_
 
 
 ***
